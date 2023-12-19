@@ -16,7 +16,6 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": false,
     "jsx": "preserve",
-    "experimentalDecorators": true,
     "resolveJsonModule": true,
     "moduleResolution": "node"
   },
