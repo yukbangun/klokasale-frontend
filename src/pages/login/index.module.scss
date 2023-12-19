@@ -1,0 +1,14 @@
+.loginPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .loginForm {
+    width: 400px;
+    
+    .submitBtn {
+      width: 100%;
+    }
+  }
+}
