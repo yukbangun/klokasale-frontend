@@ -1,5 +1,25 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx"
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components"]
+    },
+    "types": ["react", "react-dom"],
+    "target": "ES2015",
+    "lib": ["DOM", "ESNext"],
+    "allowJs": true,
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": false,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "moduleResolution": "node"
   },
+  "display": "Base",
+  "include": ["src"],
+  "exclude": ["**/node_modules"]
 }
