@@ -9,6 +9,20 @@
     
     .submitBtn {
       width: 100%;
+
+      :global {
+        .semi-button-content {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .semi-spin-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
     }
   }
 }
