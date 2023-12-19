@@ -7,6 +7,16 @@ function App() {
     {
       path: '/',
       element: <DashboardPage />,
+      // children: [
+      //   {
+      //     path: "master",
+      //     element: <MasterPage />,
+      //   },
+      //   {
+      //     path: "pos",
+      //     element: <PosPage />,
+      //   },
+      // ],
     },
     {
       path: '/login',

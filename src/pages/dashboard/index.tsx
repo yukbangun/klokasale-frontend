@@ -1,3 +1,9 @@
+import NavigationBar from 'src/components/navigation-bar';
+
 export default function DashboardPage() {
-  return <div>dashboard page</div>;
+  return (
+    <div>
+      <NavigationBar />
+    </div>
+  );
 }
