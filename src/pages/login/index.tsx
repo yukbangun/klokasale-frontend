@@ -23,8 +23,19 @@ export default function LoginPage() {
     <div className={styles.loginPage}>
       <Title heading={1}>Login</Title>
       <Form className={styles.loginForm} onSubmit={handleLogin}>
-        <Form.Input field="username" label="Username" placeholder="Enter your username" />
-        <Form.Input field="password" label="Password" placeholder="Enter your password" mode="password" />
+        <Form.Input
+          rules={[{ required: true, message: 'username harus diisi' }]}
+          field="username"
+          label="Username"
+          placeholder="Masukkan username"
+        />
+        <Form.Input
+          rules={[{ required: true, message: 'password harus diisi' }]}
+          field="password"
+          label="Password"
+          placeholder="Masukkan password"
+          mode="password"
+        />
         <Button className={styles.submitBtn} htmlType="submit">
           {isSubmitting ? <Spin /> : 'Submit'}
         </Button>
