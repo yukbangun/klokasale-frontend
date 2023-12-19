@@ -1,7 +1,9 @@
-import { Button, Form, Spin } from '@douyinfe/semi-ui';
+import { Button, Form, Spin, Typography } from '@douyinfe/semi-ui';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './index.module.scss';
+
+const { Title } = Typography;
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ export default function LoginPage() {
   }
   return (
     <div className={styles.loginPage}>
+      <Title heading={1}>Login</Title>
       <Form className={styles.loginForm} onSubmit={handleLogin}>
         <Form.Input field="username" label="Username" placeholder="Enter your username" />
         <Form.Input field="password" label="Password" placeholder="Enter your password" mode="password" />
