@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@components/*": ["./src/components"]
-    },
     "types": ["react", "react-dom"],
     "target": "ES2015",
     "lib": ["DOM", "ESNext"],
