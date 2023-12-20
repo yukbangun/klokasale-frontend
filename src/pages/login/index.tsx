@@ -12,6 +12,7 @@ export default function LoginPage() {
   function handleLogin(values: unknown) {
     try {
       // TODO: handle login
+      // TODO: set bearer token to local storage
       setIsSubmitting(true);
       navigate('/');
     } catch (e) {
