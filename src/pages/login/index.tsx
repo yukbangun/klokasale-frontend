@@ -1,8 +1,9 @@
 import { Button, Form, Spin, Typography } from '@douyinfe/semi-ui';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './index.module.scss';
-
+import { isNullish } from 'src/utils/nullish';
+import { LocalStorageKey } from 'src/constants/local-storage';
 const { Title } = Typography;
 
 export default function LoginPage() {
@@ -11,6 +12,7 @@ export default function LoginPage() {
   function handleLogin(values: unknown) {
     try {
       // TODO: handle login
+      // TODO: set bearer token to local storage
       setIsSubmitting(true);
       navigate('/');
     } catch (e) {
@@ -19,6 +21,14 @@ export default function LoginPage() {
       setIsSubmitting(false);
     }
   }
+
+  useEffect(() => {
+    const bearerToken = localStorage.getItem(LocalStorageKey.BearerToken);
+    if (!isNullish(bearerToken)) {
+      navigate('/');
+    }
+  }, []);
+
   return (
     <div className={styles.loginPage}>
       <Title heading={1}>Login</Title>

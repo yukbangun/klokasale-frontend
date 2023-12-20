@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "types": ["react", "react-dom"],
     "target": "ES2015",
     "lib": ["DOM", "ESNext"],
