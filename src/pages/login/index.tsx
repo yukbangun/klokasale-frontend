@@ -14,6 +14,7 @@ export default function LoginPage() {
       // TODO: handle login
       // TODO: set bearer token to local storage
       setIsSubmitting(true);
+      localStorage.setItem(LocalStorageKey.BearerToken, 'a');
       navigate('/');
     } catch (e) {
       // TODO: show error toast

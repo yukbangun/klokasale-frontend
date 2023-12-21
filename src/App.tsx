@@ -9,12 +9,36 @@ function App() {
       element: <DashboardPage />,
       // children: [
       //   {
-      //     path: "master",
-      //     element: <MasterPage />,
+      //     index: true,
+      //     element: <div>pos</div>,
       //   },
       //   {
-      //     path: "pos",
-      //     element: <PosPage />,
+      //     path: 'pos',
+      //     element: <div>pos</div>,
+      //   },
+      //   {
+      //     path: 'barang',
+      //     element: <div>barang</div>,
+      //   },
+      //   {
+      //     path: 'supplier',
+      //     element: <div>supplier</div>,
+      //   },
+      //   {
+      //     path: 'pelanggan',
+      //     element: <div>pelanggan</div>,
+      //   },
+      //   {
+      //     path: 'kas_dan_biaya',
+      //     element: <div>kas_dan_biaya</div>,
+      //   },
+      //   {
+      //     path: 'piutang',
+      //     element: <div>piutang</div>,
+      //   },
+      //   {
+      //     path: 'hutang',
+      //     element: <div>hutang</div>,
       //   },
       // ],
     },

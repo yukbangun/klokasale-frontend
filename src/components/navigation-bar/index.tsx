@@ -1,16 +1,21 @@
-import { Nav, TreeSelect } from '@douyinfe/semi-ui';
+import { Button, Nav, TreeSelect, Typography } from '@douyinfe/semi-ui';
 import styles from './index.module.scss';
 import { OnSelectedData } from '@douyinfe/semi-ui/lib/es/navigation';
 import { Navigation, navigationToLabelMap } from 'src/constants/navigation';
 import { MasterNavigation, masterNavigationToLabelMap } from 'src/constants/navigation/master';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { TNavigation } from 'src/types/navigation';
 import { isNullish } from 'src/utils/nullish';
+import { LocalStorageKey } from 'src/constants/local-storage';
+
+const { Text } = Typography;
 
 export default function NavigationBar() {
   const [selectedNav, setSelectedNav] = useState<TNavigation>(Navigation.Pos);
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const navigationItems = [
     { itemKey: Navigation.Pos, text: navigationToLabelMap[Navigation.Pos] },
     {
@@ -64,20 +69,21 @@ export default function NavigationBar() {
 
   function handleChangeNav(key: OnSelectedData) {
     const { itemKey } = key;
-    const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set('nav', `${itemKey}`);
-    navigate(`/?${urlParams}`);
-    setSelectedNav(itemKey as TNavigation);
+    searchParams.set('nav', `${itemKey}`);
+    setSearchParams(searchParams);
+  }
+
+  function handleLogout() {
+    localStorage.removeItem(LocalStorageKey.BearerToken);
+    navigate('/login');
   }
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const nav = urlParams.get('nav');
-    const hasNav = !isNullish(nav);
-    if (hasNav) {
+    const nav = searchParams.get('nav');
+    if (!isNullish(nav)) {
       setSelectedNav(nav as TNavigation);
     }
-  }, []);
+  }, [searchParams]);
 
   return (
     <Nav
@@ -95,6 +101,14 @@ export default function NavigationBar() {
             placeholder="Please select"
           />
         ),
+      }}
+      footer={{
+        children: (
+          <Button className={styles.logoutBtn}>
+            <Text strong>Logout</Text>
+          </Button>
+        ),
+        onClick: handleLogout,
       }}
     />
   );
