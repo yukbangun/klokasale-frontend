@@ -1,17 +1,17 @@
 export enum BarangNavigation {
-  Merk = 'merk',
-  SatuanBarang = 'satuan_barang',
+  Trademark = 'trademark',
+  Unit = 'unit',
   Barang = 'barang',
 }
 
 export enum BarangNavigationLabel {
-  Merk = 'Merk',
-  SatuanBarang = 'Satuan Barang',
+  Trademark = 'Trademark',
+  Unit = 'Unit (UOM)',
   Barang = 'Barang',
 }
 
 export const barangNavigationToLabelMap = {
-  [BarangNavigation.Merk]: BarangNavigationLabel.Merk,
-  [BarangNavigation.SatuanBarang]: BarangNavigationLabel.SatuanBarang,
+  [BarangNavigation.Trademark]: BarangNavigationLabel.Trademark,
+  [BarangNavigation.Unit]: BarangNavigationLabel.Unit,
   [BarangNavigation.Barang]: BarangNavigationLabel.Barang,
 };

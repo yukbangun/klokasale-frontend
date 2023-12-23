@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginPage from './pages/login';
 import DashboardPage from './pages/dashboard';
+import MasterBarangPage from './pages/master/barang';
 
 function App() {
   const router = createBrowserRouter([
@@ -20,8 +21,16 @@ function App() {
           path: 'master',
           children: [
             {
+              path: 'trademark',
+              element: <div>trademark</div>,
+            },
+            {
               path: 'barang',
-              element: <div>barang</div>,
+              element: <MasterBarangPage />,
+            },
+            {
+              path: 'unit',
+              element: <div>unit</div>,
             },
             {
               path: 'supplier',

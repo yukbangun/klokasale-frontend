@@ -88,7 +88,7 @@ export default function NavigationBar() {
       defaultOpenKeys={['master']}
       items={navigationItems}
       onSelect={handleChangeNav}
-      defaultSelectedKeys={[selectedNav]}
+      selectedKeys={[selectedNav]}
       header={{
         children: (
           <TreeSelect
