@@ -7,40 +7,45 @@ function App() {
     {
       path: '/',
       element: <DashboardPage />,
-      // children: [
-      //   {
-      //     index: true,
-      //     element: <div>pos</div>,
-      //   },
-      //   {
-      //     path: 'pos',
-      //     element: <div>pos</div>,
-      //   },
-      //   {
-      //     path: 'barang',
-      //     element: <div>barang</div>,
-      //   },
-      //   {
-      //     path: 'supplier',
-      //     element: <div>supplier</div>,
-      //   },
-      //   {
-      //     path: 'pelanggan',
-      //     element: <div>pelanggan</div>,
-      //   },
-      //   {
-      //     path: 'kas_dan_biaya',
-      //     element: <div>kas_dan_biaya</div>,
-      //   },
-      //   {
-      //     path: 'piutang',
-      //     element: <div>piutang</div>,
-      //   },
-      //   {
-      //     path: 'hutang',
-      //     element: <div>hutang</div>,
-      //   },
-      // ],
+      children: [
+        {
+          index: true,
+          element: <div>pos</div>,
+        },
+        {
+          path: 'pos',
+          element: <div>pos</div>,
+        },
+        {
+          path: 'master',
+          children: [
+            {
+              path: 'barang',
+              element: <div>barang</div>,
+            },
+            {
+              path: 'supplier',
+              element: <div>supplier</div>,
+            },
+            {
+              path: 'pelanggan',
+              element: <div>pelanggan</div>,
+            },
+            {
+              path: 'kas_dan_biaya',
+              element: <div>kas_dan_biaya</div>,
+            },
+            {
+              path: 'piutang',
+              element: <div>piutang</div>,
+            },
+            {
+              path: 'hutang',
+              element: <div>hutang</div>,
+            },
+          ],
+        },
+      ],
     },
     {
       path: '/login',

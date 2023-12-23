@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import NavigationBar from 'src/components/navigation-bar';
 import { LocalStorageKey } from 'src/constants/local-storage';
 import { isNullish } from 'src/utils/nullish';
@@ -16,6 +16,7 @@ export default function DashboardPage() {
   return (
     <div className={styles.dashboardPage}>
       <NavigationBar />
+      <Outlet />
     </div>
   );
 }

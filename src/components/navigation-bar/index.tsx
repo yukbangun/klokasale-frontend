@@ -1,20 +1,19 @@
 import { Button, Nav, TreeSelect, Typography } from '@douyinfe/semi-ui';
-import styles from './index.module.scss';
 import { OnSelectedData } from '@douyinfe/semi-ui/lib/es/navigation';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { LocalStorageKey } from 'src/constants/local-storage';
 import { Navigation, navigationToLabelMap } from 'src/constants/navigation';
 import { MasterNavigation, masterNavigationToLabelMap } from 'src/constants/navigation/master';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import styles from './index.module.scss';
 import { TNavigation } from 'src/types/navigation';
-import { isNullish } from 'src/utils/nullish';
-import { LocalStorageKey } from 'src/constants/local-storage';
 
 const { Text } = Typography;
 
 export default function NavigationBar() {
   const [selectedNav, setSelectedNav] = useState<TNavigation>(Navigation.Pos);
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
 
   const navigationItems = [
     { itemKey: Navigation.Pos, text: navigationToLabelMap[Navigation.Pos] },
@@ -22,7 +21,7 @@ export default function NavigationBar() {
       text: navigationToLabelMap[Navigation.Master],
       itemKey: Navigation.Master,
       items: Object.values(MasterNavigation)?.map(masterNav => ({
-        itemKey: masterNav,
+        itemKey: `${Navigation.Master}/${masterNav}`,
         text: masterNavigationToLabelMap[masterNav],
       })),
     },
@@ -69,8 +68,8 @@ export default function NavigationBar() {
 
   function handleChangeNav(key: OnSelectedData) {
     const { itemKey } = key;
-    searchParams.set('nav', `${itemKey}`);
-    setSearchParams(searchParams);
+    navigate(`/${itemKey}`);
+    setSelectedNav(itemKey as TNavigation);
   }
 
   function handleLogout() {
@@ -79,11 +78,9 @@ export default function NavigationBar() {
   }
 
   useEffect(() => {
-    const nav = searchParams.get('nav');
-    if (!isNullish(nav)) {
-      setSelectedNav(nav as TNavigation);
-    }
-  }, [searchParams]);
+    const { pathname = '' } = location;
+    setSelectedNav(pathname.slice(1) as TNavigation);
+  }, []);
 
   return (
     <Nav
