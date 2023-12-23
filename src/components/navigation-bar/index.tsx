@@ -79,7 +79,8 @@ export default function NavigationBar() {
 
   useEffect(() => {
     const { pathname = '' } = location;
-    setSelectedNav(pathname.slice(1) as TNavigation);
+    const selectedNav = (pathname.slice(1) as TNavigation) || Navigation.Pos;
+    setSelectedNav(selectedNav);
   }, [location]);
 
   return (
