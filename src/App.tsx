@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginPage from './pages/login';
 import DashboardPage from './pages/dashboard';
 import MasterBarangPage from './pages/master/barang';
+import MasterTrademarkPage from './pages/master/trademark';
 
 function App() {
   const router = createBrowserRouter([
@@ -22,7 +23,7 @@ function App() {
           children: [
             {
               path: 'trademark',
-              element: <div>trademark</div>,
+              element: <MasterTrademarkPage />,
             },
             {
               path: 'barang',

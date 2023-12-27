@@ -15,8 +15,12 @@ export default function DashboardPage() {
   }, []);
   return (
     <div className={styles.dashboardPage}>
-      <NavigationBar />
-      <Outlet />
+      <div className={styles.navigationBarContainer}>
+        <NavigationBar />
+      </div>
+      <div className={styles.outletContainer}>
+        <Outlet />
+      </div>
     </div>
   );
 }

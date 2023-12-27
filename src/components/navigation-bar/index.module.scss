@@ -4,4 +4,20 @@
   .logoutBtn {
     width: 100%;
   }
+
+  :global {
+    .semi-navigation-inner {
+      max-height: 100vh;
+
+      .semi-navigation-header-list-outer {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .semi-navigation-footer {
+        flex-shrink: 0;
+      }
+    }
+  }
 }

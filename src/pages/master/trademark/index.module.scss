@@ -1,0 +1,64 @@
+.masterTrademarkPage {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+
+  .trademarkContainer {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .sortAndFilter {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+    }
+
+    .trademarkTable {
+      overflow: auto;
+
+      .noDataDisplay {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    .pagination {
+      margin: 0 auto;
+    }
+  }
+
+  // .masterTrademarkContainer {
+  //   display: flex;
+  //   gap: 20px;
+
+    // .tradeMarkForm,
+    // .trademarkTable {
+    //   flex: 1;
+    // }
+
+    // .tradeMarkForm {
+    //   .submitBtn {
+    //     width: 100%;
+    //   }
+    // }
+
+    // .trademarkTable {
+    //   overflow: auto;
+    // }
+
+    // .noDataDisplay {
+    //   width: 150px;
+    //   height: 150px;
+    // }
+  // }
+}
