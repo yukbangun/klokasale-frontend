@@ -1,0 +1,24 @@
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .loginForm {
+    width: 400px;
+    
+    .submitBtn {
+      width: 100%;
+
+      :global {
+        .semi-button-content {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
