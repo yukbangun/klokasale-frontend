@@ -26,6 +26,12 @@
     .trademarkTable {
       overflow: auto;
 
+      .editAnDeleteContainer {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
       .noDataDisplay {
         width: 150px;
         height: 150px;
@@ -36,29 +42,4 @@
       margin: 0 auto;
     }
   }
-
-  // .masterTrademarkContainer {
-  //   display: flex;
-  //   gap: 20px;
-
-    // .tradeMarkForm,
-    // .trademarkTable {
-    //   flex: 1;
-    // }
-
-    // .tradeMarkForm {
-    //   .submitBtn {
-    //     width: 100%;
-    //   }
-    // }
-
-    // .trademarkTable {
-    //   overflow: auto;
-    // }
-
-    // .noDataDisplay {
-    //   width: 150px;
-    //   height: 150px;
-    // }
-  // }
 }

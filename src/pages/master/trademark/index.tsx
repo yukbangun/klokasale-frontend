@@ -1,19 +1,20 @@
+import { IconDelete, IconEdit, IconPlus } from '@douyinfe/semi-icons';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
-import { Button, Empty, Form, Pagination, Select, Spin, Table, Typography } from '@douyinfe/semi-ui';
+import { Button, Empty, Pagination, Table, Typography } from '@douyinfe/semi-ui';
 import { useEffect, useState } from 'react';
+import ButtonDropdown from 'src/components/dropdown-button';
+import { TRADEMARK_SORT_OPTIONS } from 'src/constants/master/trademark/sort';
+import { DEFAULT_SORT } from 'src/constants/sort';
+import useAddTrademark from 'src/hooks/master/trademark/add-trademark';
 import { TPagination } from 'src/types/pagination';
 import { TSort } from 'src/types/sort';
 import styles from './index.module.scss';
-import { IconPlus } from '@douyinfe/semi-icons';
-import { DEFAULT_SORT, SortDirection } from 'src/constants/sort';
-import { TRADEMARK_SORT_OPTIONS } from 'src/constants/master/trademark/sort';
-import ButtonDropdown from 'src/components/dropdown-button';
 
 const { Title } = Typography;
 
 export default function MasterTrademarkPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [trademarkList, setTrademarkList] = useState<unknown[]>([]);
+  const { addTrademarkForm, handleShowAddTrademarkForm } = useAddTrademark({});
   const [sort, setSort] = useState<TSort | string>(DEFAULT_SORT);
   const [filters, setFilters] = useState<unknown>({});
   const [pagination, setPagination] = useState<TPagination>({
@@ -24,12 +25,23 @@ export default function MasterTrademarkPage() {
     {
       title: 'Kode Trademark',
       dataIndex: 'trademark_code',
-      width: 100,
+      width: 150,
     },
     {
       title: 'Trademark',
       dataIndex: 'trademark',
-      width: 200,
+      width: 250,
+    },
+    {
+      fixed: true,
+      render: (_: unknown, record: unknown) => {
+        return (
+          <div className={styles.editAnDeleteContainer}>
+            <Button icon={<IconEdit />} onClick={() => console.log(record)} />
+            <Button icon={<IconDelete />} onClick={() => console.log(record)} />
+          </div>
+        );
+      },
     },
   ];
 
@@ -40,40 +52,12 @@ export default function MasterTrademarkPage() {
   function getTrademarks() {}
   function updateTrademarks() {}
 
-  function handleAddTrademark(values: unknown) {
-    try {
-      // TODO: handle submit trademark
-      setIsSubmitting(true);
-    } catch (e) {
-      // TODO: show error toast
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
-
   useEffect(() => {}, []);
 
   return (
     <div className={styles.masterTrademarkPage}>
       <Title heading={1}>Trademark</Title>
       <div className={styles.trademarkContainer}>
-        {/* <Form className={styles.tradeMarkForm} onSubmit={handleAddTrademark}>
-          <Form.Input
-            rules={[{ required: true, message: 'kode trademark harus diisi' }]}
-            field="trademark_code"
-            label="Kode Trademark"
-            placeholder="Masukkan kode trademark"
-          />
-          <Form.Input
-            rules={[{ required: true, message: 'trademark harus diisi' }]}
-            field="trademark"
-            label="Trademark"
-            placeholder="Masukkan trademark"
-          />
-          <Button className={styles.submitBtn} htmlType="submit">
-            {isSubmitting ? <Spin /> : 'Submit'}
-          </Button>
-        </Form> */}
         <div className={styles.toolbar}>
           <div className={styles.sortAndFilter}>
             <ButtonDropdown
@@ -82,7 +66,9 @@ export default function MasterTrademarkPage() {
               onChange={(sort: unknown) => handleChangeSort(sort as TSort | string)}
             />
           </div>
-          <Button icon={<IconPlus />}>Tambah Trademark</Button>
+          <Button icon={<IconPlus />} onClick={handleShowAddTrademarkForm}>
+            Tambah Trademark
+          </Button>
         </div>
         <Table
           className={styles.trademarkTable}
@@ -181,8 +167,14 @@ export default function MasterTrademarkPage() {
             />
           }
         />
-        <Pagination total={80} currentPage={pagination.page} className={styles.pagination}></Pagination>
+        <Pagination
+          total={80}
+          currentPage={pagination.page}
+          className={styles.pagination}
+          popoverPosition="top"
+        ></Pagination>
       </div>
+      {addTrademarkForm}
     </div>
   );
 }
