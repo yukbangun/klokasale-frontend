@@ -1,20 +1,22 @@
 import { Button, Form, Spin, Typography } from '@douyinfe/semi-ui';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './index.module.scss';
-import { isNullish } from 'src/utils/nullish';
 import { LocalStorageKey } from 'src/constants/local-storage';
+import { UsersApi } from 'src/services';
+import { isNullish } from 'src/utils/nullish';
+import styles from './index.module.scss';
 const { Title } = Typography;
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  function handleLogin(values: unknown) {
+
+  async function handleLogin(values: { username: string; password: string }) {
     try {
-      // TODO: handle login
-      // TODO: set bearer token to local storage
       setIsSubmitting(true);
-      localStorage.setItem(LocalStorageKey.BearerToken, 'a');
+      const { username, password } = values;
+      const userApi = new UsersApi();
+      await userApi.v1UsersLoginPost({ username, password });
       navigate('/');
     } catch (e) {
       // TODO: show error toast
