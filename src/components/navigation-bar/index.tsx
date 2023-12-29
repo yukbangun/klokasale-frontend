@@ -1,12 +1,12 @@
 import { Button, Nav, TreeSelect, Typography } from '@douyinfe/semi-ui';
 import { OnSelectedData } from '@douyinfe/semi-ui/lib/es/navigation';
 import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { LocalStorageKey } from 'src/constants/local-storage';
 import { Navigation, navigationToLabelMap } from 'src/constants/navigation';
 import { MasterNavigation, masterNavigationToLabelMap } from 'src/constants/navigation/master';
-import styles from './index.module.scss';
 import { TNavigation } from 'src/types/navigation';
+import styles from './index.module.scss';
 
 const { Text } = Typography;
 
@@ -14,6 +14,7 @@ export default function NavigationBar() {
   const [selectedNav, setSelectedNav] = useState<TNavigation>(Navigation.Pos);
   const navigate = useNavigate();
   const location = useLocation();
+  const [, , removeCookie] = useCookies();
 
   const navigationItems = [
     { itemKey: Navigation.Pos, text: navigationToLabelMap[Navigation.Pos] },
@@ -73,7 +74,7 @@ export default function NavigationBar() {
   }
 
   function handleLogout() {
-    localStorage.removeItem(LocalStorageKey.BearerToken);
+    removeCookie('token');
     navigate('/login');
   }
 
