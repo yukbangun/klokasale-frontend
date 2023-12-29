@@ -66,7 +66,7 @@ export default function MasterTrademarkPage() {
               onChange={(sort: unknown) => handleChangeSort(sort as TSort | string)}
             />
           </div>
-          <Button icon={<IconPlus />} onClick={handleShowAddTrademarkForm}>
+          <Button theme="solid" icon={<IconPlus />} onClick={handleShowAddTrademarkForm}>
             Tambah Trademark
           </Button>
         </div>
