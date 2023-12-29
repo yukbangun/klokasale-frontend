@@ -35,19 +35,51 @@
           "200": {
             "description": "OK",
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/common.SuccessResponse"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "$ref": "#/definitions/user.UserLoginResp"
-                    }
-                  }
-                }
-              ]
+              "$ref": "#/definitions/common.SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/register": {
+      "post": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["users"],
+        "summary": "User Login",
+        "parameters": [
+          {
+            "description": "Register Request Body",
+            "name": "LoginRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user.UserRegisterReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/common.SuccessResponse"
             }
           },
           "400": {
@@ -102,10 +134,22 @@
         }
       }
     },
-    "user.UserLoginResp": {
+    "user.UserRegisterReq": {
       "type": "object",
       "properties": {
-        "token": {
+        "address": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "username": {
           "type": "string"
         }
       }
