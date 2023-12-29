@@ -90,28 +90,39 @@ export interface UserUserLoginReq {
 /**
  * 
  * @export
- * @interface UserUserLoginResp
+ * @interface UserUserRegisterReq
  */
-export interface UserUserLoginResp {
+export interface UserUserRegisterReq {
     /**
      * 
      * @type {string}
-     * @memberof UserUserLoginResp
+     * @memberof UserUserRegisterReq
      */
-    'token'?: string;
-}
-/**
- * 
- * @export
- * @interface V1UsersLoginPost200Response
- */
-export interface V1UsersLoginPost200Response {
+    'address'?: string;
     /**
      * 
-     * @type {UserUserLoginResp}
-     * @memberof V1UsersLoginPost200Response
+     * @type {string}
+     * @memberof UserUserRegisterReq
      */
-    'data'?: UserUserLoginResp;
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserUserRegisterReq
+     */
+    'password'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserUserRegisterReq
+     */
+    'phone_number'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserUserRegisterReq
+     */
+    'username'?: string;
 }
 
 /**
@@ -156,6 +167,42 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary User Login
+         * @param {UserUserRegisterReq} loginRequest Register Request Body
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v1UsersRegisterPost: async (loginRequest: UserUserRegisterReq, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'loginRequest' is not null or undefined
+            assertParamExists('v1UsersRegisterPost', 'loginRequest', loginRequest)
+            const localVarPath = `/v1/users/register`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(loginRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -173,10 +220,23 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async v1UsersLoginPost(loginRequest: UserUserLoginReq, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1UsersLoginPost200Response>> {
+        async v1UsersLoginPost(loginRequest: UserUserLoginReq, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CommonSuccessResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.v1UsersLoginPost(loginRequest, options);
             const index = configuration?.serverIndex ?? 0;
             const operationBasePath = operationServerMap['UsersApi.v1UsersLoginPost']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary User Login
+         * @param {UserUserRegisterReq} loginRequest Register Request Body
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1UsersRegisterPost(loginRequest: UserUserRegisterReq, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CommonSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.v1UsersRegisterPost(loginRequest, options);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['UsersApi.v1UsersRegisterPost']?.[index]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
@@ -196,8 +256,18 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        v1UsersLoginPost(loginRequest: UserUserLoginReq, options?: any): AxiosPromise<V1UsersLoginPost200Response> {
+        v1UsersLoginPost(loginRequest: UserUserLoginReq, options?: any): AxiosPromise<CommonSuccessResponse> {
             return localVarFp.v1UsersLoginPost(loginRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary User Login
+         * @param {UserUserRegisterReq} loginRequest Register Request Body
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v1UsersRegisterPost(loginRequest: UserUserRegisterReq, options?: any): AxiosPromise<CommonSuccessResponse> {
+            return localVarFp.v1UsersRegisterPost(loginRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -219,6 +289,18 @@ export class UsersApi extends BaseAPI {
      */
     public v1UsersLoginPost(loginRequest: UserUserLoginReq, options?: RawAxiosRequestConfig) {
         return UsersApiFp(this.configuration).v1UsersLoginPost(loginRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary User Login
+     * @param {UserUserRegisterReq} loginRequest Register Request Body
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public v1UsersRegisterPost(loginRequest: UserUserRegisterReq, options?: RawAxiosRequestConfig) {
+        return UsersApiFp(this.configuration).v1UsersRegisterPost(loginRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

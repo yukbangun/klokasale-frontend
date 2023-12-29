@@ -6,6 +6,7 @@ import { UsersApi } from 'src/services';
 import { TError } from 'src/types/error';
 import { isNullish } from 'src/utils/nullish';
 import styles from './index.module.scss';
+import { axiosInstance } from 'src/constants/axios';
 
 const { Title } = Typography;
 
@@ -18,7 +19,7 @@ export default function LoginPage() {
     try {
       setIsSubmitting(true);
       const { username, password } = values;
-      const userApi = new UsersApi();
+      const userApi = new UsersApi(undefined, undefined, axiosInstance);
       await userApi.v1UsersLoginPost({ username, password });
       navigate('/');
     } catch (e) {
