@@ -1,0 +1,15 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .sortAndFilter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+.pagination {
+  margin: 0 auto;
+}

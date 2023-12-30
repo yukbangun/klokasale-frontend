@@ -1,6 +1,10 @@
-import { SortDirection } from 'src/constants/sort';
+import { ESortDirection } from 'src/constants/sort';
 
-export type TSort = {
-  field: string;
-  direction?: SortDirection;
-};
+export type TSort =
+  | string
+  | {
+      field: string;
+      direction?: ESortDirection;
+    };
+
+export type TSortOption = { value: TSort; label: string };

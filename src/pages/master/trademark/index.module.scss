@@ -11,17 +11,17 @@
     flex-direction: column;
     gap: 12px;
 
-    .toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    // .toolbar {
+    //   display: flex;
+    //   justify-content: space-between;
+    //   align-items: center;
 
-      .sortAndFilter {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-    }
+    //   .sortAndFilter {
+    //     display: flex;
+    //     align-items: center;
+    //     gap: 12px;
+    //   }
+    // }
 
     .trademarkTable {
       overflow: auto;
@@ -39,8 +39,8 @@
       }
     }
 
-    .pagination {
-      margin: 0 auto;
-    }
+    // .pagination {
+    //   margin: 0 auto;
+    // }
   }
 }

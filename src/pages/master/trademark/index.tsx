@@ -10,16 +10,28 @@ import useAddTrademark from 'src/hooks/master/trademark/add-trademark';
 import { TPagination } from 'src/types/pagination';
 import { TSort } from 'src/types/sort';
 import styles from './index.module.scss';
+import useToolbar from 'src/hooks/toolbar';
+import { TRADEMARK_FILTER_FIELDS } from 'src/constants/master/trademark/filter';
 
 const { Title } = Typography;
 
 export default function MasterTrademarkPage() {
   const [trademarkList, setTrademarkList] = useState<unknown[]>([]);
   const { addTrademarkForm, handleShowAddTrademarkForm } = useAddTrademark({});
-  const [sort, setSort] = useState<TSort>(DEFAULT_SORT);
-  const [filters, setFilters] = useState<unknown>({});
-  const [pagination, setPagination] = useState<TPagination>({
-    page: 1,
+  // const [sort, setSort] = useState<TSort>(DEFAULT_SORT);
+  // const [filters, setFilters] = useState<unknown>({});
+  // const [pagination, setPagination] = useState<TPagination>({
+  //   page: 1,
+  // });
+
+  const { sort, filters, pagination, toolbar, paginationDisplay } = useToolbar({
+    initialSort: DEFAULT_SORT,
+    sortOptions: TRADEMARK_SORT_OPTIONS,
+    initialFilters: { trademark: undefined, trademark_code: undefined },
+    filterFields: TRADEMARK_FILTER_FIELDS,
+    addNewDataLabel: 'Tambah Trademark',
+    onClickAddNewData: handleShowAddTrademarkForm,
+    initialPagination: { page: 1 },
   });
 
   const columns: ColumnProps[] = [
@@ -44,9 +56,9 @@ export default function MasterTrademarkPage() {
     },
   ];
 
-  function handleChangeSort(sort: TSort) {
-    setSort(sort);
-  }
+  // function handleChangeSort(sort: TSort) {
+  //   setSort(sort);
+  // }
 
   function getTrademarks() {}
   function updateTrademarks() {}
@@ -57,7 +69,7 @@ export default function MasterTrademarkPage() {
     <div className={styles.masterTrademarkPage}>
       <Title heading={1}>Trademark</Title>
       <div className={styles.trademarkContainer}>
-        <div className={styles.toolbar}>
+        {/* <div className={styles.toolbar}>
           <div className={styles.sortAndFilter}>
             <ButtonDropdown
               value={sort}
@@ -68,7 +80,8 @@ export default function MasterTrademarkPage() {
           <Button theme="solid" icon={<IconPlus />} onClick={handleShowAddTrademarkForm}>
             Tambah Trademark
           </Button>
-        </div>
+        </div> */}
+        {toolbar}
         <Table
           className={styles.trademarkTable}
           columns={columns}
@@ -194,12 +207,13 @@ export default function MasterTrademarkPage() {
           //   fixed: true,
           // }}
         />
-        <Pagination
+        {/* <Pagination
           total={80}
           currentPage={pagination.page}
           className={styles.pagination}
           popoverPosition="top"
-        ></Pagination>
+        ></Pagination> */}
+        {paginationDisplay}
       </div>
       {addTrademarkForm}
     </div>
