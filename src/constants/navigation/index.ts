@@ -1,16 +1,16 @@
-import { MasterNavigation, masterNavigationToLabelMap } from './master';
+import { EMasterNavigation, masterNavigationToLabelMap } from './master';
 
-export enum Navigation {
+export enum ENavigation {
   Pos = 'pos',
   Master = 'master',
 }
 
-export enum NavigationLabel {
+export enum ENavigationLabel {
   Pos = 'POS',
   Master = 'Master',
 }
 
 export const navigationToLabelMap = {
-  [Navigation.Pos]: NavigationLabel.Pos,
-  [Navigation.Master]: NavigationLabel.Master,
+  [ENavigation.Pos]: ENavigationLabel.Pos,
+  [ENavigation.Master]: ENavigationLabel.Master,
 };

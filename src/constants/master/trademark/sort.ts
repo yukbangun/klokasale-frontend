@@ -1,22 +1,22 @@
-import { DEFAULT_SORT, DEFAULT_SORT_LABEL, SortDirection } from 'src/constants/sort';
-import { TSort } from 'src/types/sort';
+import { DEFAULT_SORT, DEFAULT_SORT_LABEL, ESortDirection } from 'src/constants/sort';
+import { TSortOption } from 'src/types/sort';
 
-export const TRADEMARK_SORT_OPTIONS: { value: TSort | string; label: string }[] = [
+export const TRADEMARK_SORT_OPTIONS: TSortOption[] = [
   { value: DEFAULT_SORT, label: DEFAULT_SORT_LABEL },
   {
-    value: { field: 'trademark_code', direction: SortDirection.Asc },
+    value: { field: 'trademark_code', direction: ESortDirection.Asc },
     label: 'Kode Trademark Asc',
   },
   {
-    value: { field: 'trademark_code', direction: SortDirection.Desc },
+    value: { field: 'trademark_code', direction: ESortDirection.Desc },
     label: 'Kode Trademark Desc',
   },
   {
-    value: { field: 'trademark', direction: SortDirection.Asc },
+    value: { field: 'trademark', direction: ESortDirection.Asc },
     label: 'Trademark Asc',
   },
   {
-    value: { field: 'trademark', direction: SortDirection.Desc },
+    value: { field: 'trademark', direction: ESortDirection.Desc },
     label: 'Trademark Desc',
   },
 ];

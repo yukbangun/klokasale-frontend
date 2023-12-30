@@ -1,3 +1,3 @@
-export enum LocalStorageKey {
+export enum ELocalStorageKey {
   BearerToken = 'bearer_token',
 }

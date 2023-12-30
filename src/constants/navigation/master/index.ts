@@ -1,4 +1,4 @@
-export enum MasterNavigation {
+export enum EMasterNavigation {
   Trademark = 'trademark',
   Barang = 'barang',
   Unit = 'unit',
@@ -9,7 +9,7 @@ export enum MasterNavigation {
   Hutang = 'hutang',
 }
 
-export enum MasterNavigationLabel {
+export enum EMasterNavigationLabel {
   Trademark = 'Trademark',
   Barang = 'Barang',
   Unit = 'Unit (UOM)',
@@ -21,12 +21,12 @@ export enum MasterNavigationLabel {
 }
 
 export const masterNavigationToLabelMap = {
-  [MasterNavigation.Trademark]: MasterNavigationLabel.Trademark,
-  [MasterNavigation.Barang]: MasterNavigationLabel.Barang,
-  [MasterNavigation.Unit]: MasterNavigationLabel.Unit,
-  [MasterNavigation.Supplier]: MasterNavigationLabel.Supplier,
-  [MasterNavigation.Pelanggan]: MasterNavigationLabel.Pelanggan,
-  [MasterNavigation.KasDanBiaya]: MasterNavigationLabel.KasDanBiaya,
-  [MasterNavigation.Piutang]: MasterNavigationLabel.Piutang,
-  [MasterNavigation.Hutang]: MasterNavigationLabel.Hutang,
+  [EMasterNavigation.Trademark]: EMasterNavigationLabel.Trademark,
+  [EMasterNavigation.Barang]: EMasterNavigationLabel.Barang,
+  [EMasterNavigation.Unit]: EMasterNavigationLabel.Unit,
+  [EMasterNavigation.Supplier]: EMasterNavigationLabel.Supplier,
+  [EMasterNavigation.Pelanggan]: EMasterNavigationLabel.Pelanggan,
+  [EMasterNavigation.KasDanBiaya]: EMasterNavigationLabel.KasDanBiaya,
+  [EMasterNavigation.Piutang]: EMasterNavigationLabel.Piutang,
+  [EMasterNavigation.Hutang]: EMasterNavigationLabel.Hutang,
 };

@@ -1,4 +1,4 @@
-import { Navigation } from 'src/constants/navigation';
-import { MasterNavigation } from 'src/constants/navigation/master';
+import { ENavigation } from 'src/constants/navigation';
+import { EMasterNavigation } from 'src/constants/navigation/master';
 
-export type TNavigation = Navigation.Pos | `${Navigation.Master}/${MasterNavigation}`;
+export type TNavigation = ENavigation.Pos | `${ENavigation.Master}/${EMasterNavigation}`;

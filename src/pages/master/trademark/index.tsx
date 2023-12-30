@@ -1,6 +1,7 @@
 import { IconDelete, IconEdit, IconPlus } from '@douyinfe/semi-icons';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
 import { Button, Empty, Pagination, Table, Typography } from '@douyinfe/semi-ui';
+import { ColumnProps } from '@douyinfe/semi-ui/lib/es/table';
 import { useEffect, useState } from 'react';
 import ButtonDropdown from 'src/components/dropdown-button';
 import { TRADEMARK_SORT_OPTIONS } from 'src/constants/master/trademark/sort';
@@ -15,25 +16,23 @@ const { Title } = Typography;
 export default function MasterTrademarkPage() {
   const [trademarkList, setTrademarkList] = useState<unknown[]>([]);
   const { addTrademarkForm, handleShowAddTrademarkForm } = useAddTrademark({});
-  const [sort, setSort] = useState<TSort | string>(DEFAULT_SORT);
+  const [sort, setSort] = useState<TSort>(DEFAULT_SORT);
   const [filters, setFilters] = useState<unknown>({});
   const [pagination, setPagination] = useState<TPagination>({
     page: 1,
   });
 
-  const columns = [
+  const columns: ColumnProps[] = [
     {
       title: 'Kode Trademark',
       dataIndex: 'trademark_code',
-      width: 150,
     },
     {
       title: 'Trademark',
       dataIndex: 'trademark',
-      width: 250,
     },
     {
-      fixed: true,
+      fixed: 'right',
       render: (_: unknown, record: unknown) => {
         return (
           <div className={styles.editAnDeleteContainer}>
@@ -45,7 +44,7 @@ export default function MasterTrademarkPage() {
     },
   ];
 
-  function handleChangeSort(sort: TSort | string) {
+  function handleChangeSort(sort: TSort) {
     setSort(sort);
   }
 
@@ -63,7 +62,7 @@ export default function MasterTrademarkPage() {
             <ButtonDropdown
               value={sort}
               options={TRADEMARK_SORT_OPTIONS}
-              onChange={(sort: unknown) => handleChangeSort(sort as TSort | string)}
+              onChange={(sort: unknown) => handleChangeSort(sort as TSort)}
             />
           </div>
           <Button theme="solid" icon={<IconPlus />} onClick={handleShowAddTrademarkForm}>
@@ -78,86 +77,107 @@ export default function MasterTrademarkPage() {
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 0,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 1,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 2,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 3,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 4,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 5,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 6,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 7,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 8,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 9,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 10,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 11,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 12,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 13,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 14,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 15,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 16,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 17,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 18,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 19,
             },
             {
               trademark_code: 'AA',
               trademark: 'Angsa Anggun',
+              key: 20,
             },
           ]}
           empty={
@@ -166,6 +186,13 @@ export default function MasterTrademarkPage() {
               description={'Belum ada trademark'}
             />
           }
+          // rowSelection={{
+          //   onChange: (selectedRowKeys, selectedRows) => {
+          //     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+          //   },
+          //   onSelectAll: () => {},
+          //   fixed: true,
+          // }}
         />
         <Pagination
           total={80}

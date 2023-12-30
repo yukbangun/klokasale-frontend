@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './index.module.scss';
 import { isNullish } from 'src/utils/nullish';
-import { LocalStorageKey } from 'src/constants/local-storage';
+import { ELocalStorageKey } from 'src/constants/local-storage';
 const { Title } = Typography;
 
 export default function LoginPage() {
@@ -14,7 +14,7 @@ export default function LoginPage() {
       // TODO: handle login
       // TODO: set bearer token to local storage
       setIsSubmitting(true);
-      localStorage.setItem(LocalStorageKey.BearerToken, 'a');
+      localStorage.setItem(ELocalStorageKey.BearerToken, 'a');
       navigate('/');
     } catch (e) {
       // TODO: show error toast
@@ -24,7 +24,7 @@ export default function LoginPage() {
   }
 
   useEffect(() => {
-    const bearerToken = localStorage.getItem(LocalStorageKey.BearerToken);
+    const bearerToken = localStorage.getItem(ELocalStorageKey.BearerToken);
     if (!isNullish(bearerToken)) {
       navigate('/');
     }

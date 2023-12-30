@@ -2,26 +2,26 @@ import { Button, Nav, TreeSelect, Typography } from '@douyinfe/semi-ui';
 import { OnSelectedData } from '@douyinfe/semi-ui/lib/es/navigation';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { LocalStorageKey } from 'src/constants/local-storage';
-import { Navigation, navigationToLabelMap } from 'src/constants/navigation';
-import { MasterNavigation, masterNavigationToLabelMap } from 'src/constants/navigation/master';
+import { ELocalStorageKey } from 'src/constants/local-storage';
+import { ENavigation, navigationToLabelMap } from 'src/constants/navigation';
+import { EMasterNavigation, masterNavigationToLabelMap } from 'src/constants/navigation/master';
 import styles from './index.module.scss';
 import { TNavigation } from 'src/types/navigation';
 
 const { Text } = Typography;
 
 export default function NavigationBar() {
-  const [selectedNav, setSelectedNav] = useState<TNavigation>(Navigation.Pos);
+  const [selectedNav, setSelectedNav] = useState<TNavigation>(ENavigation.Pos);
   const navigate = useNavigate();
   const location = useLocation();
 
   const navigationItems = [
-    { itemKey: Navigation.Pos, text: navigationToLabelMap[Navigation.Pos] },
+    { itemKey: ENavigation.Pos, text: navigationToLabelMap[ENavigation.Pos] },
     {
-      text: navigationToLabelMap[Navigation.Master],
-      itemKey: Navigation.Master,
-      items: Object.values(MasterNavigation)?.map(masterNav => ({
-        itemKey: `${Navigation.Master}/${masterNav}`,
+      text: navigationToLabelMap[ENavigation.Master],
+      itemKey: ENavigation.Master,
+      items: Object.values(EMasterNavigation)?.map(masterNav => ({
+        itemKey: `${ENavigation.Master}/${masterNav}`,
         text: masterNavigationToLabelMap[masterNav],
       })),
     },
@@ -73,13 +73,13 @@ export default function NavigationBar() {
   }
 
   function handleLogout() {
-    localStorage.removeItem(LocalStorageKey.BearerToken);
+    localStorage.removeItem(ELocalStorageKey.BearerToken);
     navigate('/login');
   }
 
   useEffect(() => {
     const { pathname = '' } = location;
-    const selectedNav = (pathname.slice(1) as TNavigation) || Navigation.Pos;
+    const selectedNav = (pathname.slice(1) as TNavigation) || ENavigation.Pos;
     setSelectedNav(selectedNav);
   }, [location]);
 
