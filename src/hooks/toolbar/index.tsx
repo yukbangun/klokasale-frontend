@@ -1,7 +1,9 @@
-import { IconPlus } from '@douyinfe/semi-icons';
-import { Button, Pagination } from '@douyinfe/semi-ui';
+import { IconFilter, IconPlus } from '@douyinfe/semi-icons';
+import { Button, Form, Pagination } from '@douyinfe/semi-ui';
+import { FormApi } from '@douyinfe/semi-ui/lib/es/form';
 import { useState } from 'react';
 import ButtonDropdown from 'src/components/dropdown-button';
+import FilterFields from 'src/components/filter-fields';
 import { TFilterField } from 'src/types/filter';
 import { TPagination } from 'src/types/pagination';
 import { TSort, TSortOption } from 'src/types/sort';
@@ -37,10 +39,26 @@ export default function useToolbar(props: TProps) {
   const [sort, setSort] = useState<TSort>(initialSort);
   const [filters, setFilters] = useState<Record<string, unknown>>(initialFilters);
   const [pagination, setPagination] = useState<TPagination>(initialPagination);
+  const [showFiltersForm, setShowFiltersForm] = useState(false);
+  const [formApi, setFormApi] = useState<FormApi>();
 
   function handleChangeSort(sort: TSort) {
     setSort(sort);
     onChangeSort?.(sort);
+  }
+
+  function handleToggleShowFiltersForm() {
+    setShowFiltersForm(prevShowFiltersForm => !prevShowFiltersForm);
+  }
+
+  function handleSubmitFilters(values: Record<string, unknown>) {
+    setFilters(values);
+    onSubmitFilter?.(values);
+  }
+
+  function handleClearFilters() {
+    formApi?.setValues(initialFilters);
+    setFilters(initialFilters);
   }
 
   function handleChangePagination(currentPage: number) {
@@ -59,10 +77,29 @@ export default function useToolbar(props: TProps) {
           options={sortOptions}
           onChange={(sort: unknown) => handleChangeSort(sort as TSort)}
         />
+        <Button icon={<IconFilter />} onClick={handleToggleShowFiltersForm}>
+          Filter
+        </Button>
       </div>
       <Button theme="solid" icon={<IconPlus />} onClick={onClickAddNewData}>
         {addNewDataLabel}
       </Button>
+    </div>
+  );
+
+  const filtersForm = (
+    <div className={styles.filtersFormContainer}>
+      <Form initValues={filters} getFormApi={(formApi: FormApi) => setFormApi(formApi)} onSubmit={handleSubmitFilters}>
+        <FilterFields filterFields={filterFields} />
+        <div className={styles.formFooterRight}>
+          <Button type="tertiary" onClick={handleClearFilters}>
+            Hapus
+          </Button>
+          <Button theme="solid" htmlType="submit">
+            Konfirmasi
+          </Button>
+        </div>
+      </Form>
     </div>
   );
 
@@ -76,5 +113,5 @@ export default function useToolbar(props: TProps) {
     ></Pagination>
   );
 
-  return { toolbar, sort, filters, pagination, paginationDisplay };
+  return { sort, filters, pagination, showFiltersForm, toolbar, filtersForm, paginationDisplay };
 }

@@ -1,0 +1,10 @@
+.filterFields {
+  display: grid;
+  margin-top: 16px;
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
+  grid-gap: 16px;
+
+  .filterField {
+    padding: 0;
+  }
+}

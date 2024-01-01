@@ -1,30 +1,21 @@
-import { IconDelete, IconEdit, IconPlus } from '@douyinfe/semi-icons';
+import { IconDelete, IconEdit } from '@douyinfe/semi-icons';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
-import { Button, Empty, Pagination, Table, Typography } from '@douyinfe/semi-ui';
+import { Button, Empty, Table, Typography } from '@douyinfe/semi-ui';
 import { ColumnProps } from '@douyinfe/semi-ui/lib/es/table';
 import { useEffect, useState } from 'react';
-import ButtonDropdown from 'src/components/dropdown-button';
+import { TRADEMARK_FILTER_FIELDS } from 'src/constants/master/trademark/filter';
 import { TRADEMARK_SORT_OPTIONS } from 'src/constants/master/trademark/sort';
 import { DEFAULT_SORT } from 'src/constants/sort';
 import useAddTrademark from 'src/hooks/master/trademark/add-trademark';
-import { TPagination } from 'src/types/pagination';
-import { TSort } from 'src/types/sort';
-import styles from './index.module.scss';
 import useToolbar from 'src/hooks/toolbar';
-import { TRADEMARK_FILTER_FIELDS } from 'src/constants/master/trademark/filter';
+import styles from './index.module.scss';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 export default function MasterTrademarkPage() {
   const [trademarkList, setTrademarkList] = useState<unknown[]>([]);
   const { addTrademarkForm, handleShowAddTrademarkForm } = useAddTrademark({});
-  // const [sort, setSort] = useState<TSort>(DEFAULT_SORT);
-  // const [filters, setFilters] = useState<unknown>({});
-  // const [pagination, setPagination] = useState<TPagination>({
-  //   page: 1,
-  // });
-
-  const { sort, filters, pagination, toolbar, paginationDisplay } = useToolbar({
+  const { sort, filters, pagination, showFiltersForm, toolbar, filtersForm, paginationDisplay } = useToolbar({
     initialSort: DEFAULT_SORT,
     sortOptions: TRADEMARK_SORT_OPTIONS,
     initialFilters: { trademark: undefined, trademark_code: undefined },
@@ -38,10 +29,16 @@ export default function MasterTrademarkPage() {
     {
       title: 'Kode Trademark',
       dataIndex: 'trademark_code',
+      render: text => {
+        return <Text ellipsis={{ showTooltip: true }}>{text}</Text>;
+      },
     },
     {
       title: 'Trademark',
       dataIndex: 'trademark',
+      render: text => {
+        return <Text ellipsis={{ showTooltip: true }}>{text}</Text>;
+      },
     },
     {
       fixed: 'right',
@@ -56,10 +53,6 @@ export default function MasterTrademarkPage() {
     },
   ];
 
-  // function handleChangeSort(sort: TSort) {
-  //   setSort(sort);
-  // }
-
   function getTrademarks() {}
   function updateTrademarks() {}
 
@@ -69,19 +62,8 @@ export default function MasterTrademarkPage() {
     <div className={styles.masterTrademarkPage}>
       <Title heading={1}>Trademark</Title>
       <div className={styles.trademarkContainer}>
-        {/* <div className={styles.toolbar}>
-          <div className={styles.sortAndFilter}>
-            <ButtonDropdown
-              value={sort}
-              options={TRADEMARK_SORT_OPTIONS}
-              onChange={(sort: unknown) => handleChangeSort(sort as TSort)}
-            />
-          </div>
-          <Button theme="solid" icon={<IconPlus />} onClick={handleShowAddTrademarkForm}>
-            Tambah Trademark
-          </Button>
-        </div> */}
         {toolbar}
+        {showFiltersForm && filtersForm}
         <Table
           className={styles.trademarkTable}
           columns={columns}
@@ -89,7 +71,8 @@ export default function MasterTrademarkPage() {
           dataSource={[
             {
               trademark_code: 'AA',
-              trademark: 'Angsa Anggun',
+              trademark:
+                'Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun',
               key: 0,
             },
             {
@@ -199,20 +182,7 @@ export default function MasterTrademarkPage() {
               description={'Belum ada trademark'}
             />
           }
-          // rowSelection={{
-          //   onChange: (selectedRowKeys, selectedRows) => {
-          //     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-          //   },
-          //   onSelectAll: () => {},
-          //   fixed: true,
-          // }}
         />
-        {/* <Pagination
-          total={80}
-          currentPage={pagination.page}
-          className={styles.pagination}
-          popoverPosition="top"
-        ></Pagination> */}
         {paginationDisplay}
       </div>
       {addTrademarkForm}

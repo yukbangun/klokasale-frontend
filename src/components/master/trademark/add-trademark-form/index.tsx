@@ -30,7 +30,8 @@ export default function AddTrademarkForm(props: TProps) {
       className={styles.addTrademarkModal}
       visible={isVisble}
       footer={undefined}
-      closable={false}
+      closeIcon={undefined}
+      onCancel={onCancel}
       header={<Title heading={4}>Tambah Trademark</Title>}
     >
       <Form className={styles.tradeMarkForm} onSubmit={handleAddTrademark}>

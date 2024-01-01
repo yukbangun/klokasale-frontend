@@ -9,19 +9,7 @@
     min-height: 0;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-
-    // .toolbar {
-    //   display: flex;
-    //   justify-content: space-between;
-    //   align-items: center;
-
-    //   .sortAndFilter {
-    //     display: flex;
-    //     align-items: center;
-    //     gap: 12px;
-    //   }
-    // }
+    gap: 16px;
 
     .trademarkTable {
       overflow: auto;
@@ -38,9 +26,5 @@
         height: 150px;
       }
     }
-
-    // .pagination {
-    //   margin: 0 auto;
-    // }
   }
 }

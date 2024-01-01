@@ -10,6 +10,17 @@
   }
 }
 
+.filtersFormContainer {
+  border-top: 2px solid var(--semi-color-border);
+
+  .formFooterRight {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+  }
+}
+
 .pagination {
   margin: 0 auto;
 }
