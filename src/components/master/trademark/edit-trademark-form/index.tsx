@@ -1,17 +1,19 @@
 import { Button, Form, Modal, Spin, Typography } from '@douyinfe/semi-ui';
 import styles from './index.module.scss';
 import { useState } from 'react';
+import { TTrademarkForm } from 'src/types/master/trademark/form';
 
 const { Title } = Typography;
 
 type TProps = {
+  values: TTrademarkForm;
   isVisble: boolean;
   onCancel: () => void;
   handleOnSubmitSuccess?: () => void;
 };
 
-export default function AddTrademarkForm(props: TProps) {
-  const { isVisble, onCancel } = props;
+export default function EditTrademarkForm(props: TProps) {
+  const { values, isVisble, onCancel } = props;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleAddTrademark(values: unknown) {
@@ -27,7 +29,7 @@ export default function AddTrademarkForm(props: TProps) {
 
   return (
     <Modal
-      className={styles.addTrademarkModal}
+      className={styles.editTrademarkModal}
       visible={isVisble}
       footer={undefined}
       closeIcon={undefined}
@@ -40,12 +42,14 @@ export default function AddTrademarkForm(props: TProps) {
           field="trademark_code"
           label="Kode Trademark"
           placeholder="Masukkan kode trademark"
+          initValue={values?.trademark_code}
         />
         <Form.Input
           rules={[{ required: true, message: 'trademark harus diisi' }]}
           field="trademark"
           label="Trademark"
           placeholder="Masukkan trademark"
+          initValue={values.trademark}
         />
         <div className={styles.formBtnContainer}>
           <Button className={styles.cancelBtn} onClick={onCancel}>

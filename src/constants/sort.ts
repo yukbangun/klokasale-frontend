@@ -4,4 +4,4 @@ export enum ESortDirection {
 }
 
 export const DEFAULT_SORT = 'default';
-export const DEFAULT_SORT_LABEL = 'Default';
+export const DEFAULT_SORT_LABEL = 'Default Sort';
