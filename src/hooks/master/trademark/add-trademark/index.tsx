@@ -19,9 +19,9 @@ export default function useAddTrademark(props: TProps) {
 
   const addTrademarkForm = (
     <AddTrademarkForm
-      isVisble={isAddTrademarkFormVisible}
+      isVisible={isAddTrademarkFormVisible}
       onCancel={handleCloseAddTrademarkForm}
-      handleOnSubmitSuccess={handleOnSubmitSuccess}
+      onSubmitSuccess={handleOnSubmitSuccess}
     />
   );
 

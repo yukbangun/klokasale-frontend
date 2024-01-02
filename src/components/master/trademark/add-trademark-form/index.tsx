@@ -5,13 +5,13 @@ import { useState } from 'react';
 const { Title } = Typography;
 
 type TProps = {
-  isVisble: boolean;
+  isVisible: boolean;
   onCancel: () => void;
-  handleOnSubmitSuccess?: () => void;
+  onSubmitSuccess?: () => void;
 };
 
 export default function AddTrademarkForm(props: TProps) {
-  const { isVisble, onCancel } = props;
+  const { isVisible, onCancel } = props;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleAddTrademark(values: unknown) {
@@ -28,7 +28,7 @@ export default function AddTrademarkForm(props: TProps) {
   return (
     <Modal
       className={styles.addTrademarkModal}
-      visible={isVisble}
+      visible={isVisible}
       footer={undefined}
       closeIcon={undefined}
       onCancel={onCancel}
@@ -49,10 +49,10 @@ export default function AddTrademarkForm(props: TProps) {
         />
         <div className={styles.formBtnContainer}>
           <Button className={styles.cancelBtn} onClick={onCancel}>
-            Cancel
+            Batal
           </Button>
           <Button theme="solid" className={styles.submitBtn} htmlType="submit">
-            {isSubmitting ? <Spin /> : 'Submit'}
+            {isSubmitting ? <Spin /> : 'Konfirmasi'}
           </Button>
         </div>
       </Form>

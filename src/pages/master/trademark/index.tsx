@@ -9,12 +9,16 @@ import { DEFAULT_SORT } from 'src/constants/sort';
 import useAddTrademark from 'src/hooks/master/trademark/add-trademark';
 import useToolbar from 'src/hooks/toolbar';
 import styles from './index.module.scss';
+import useEditTrademark from 'src/hooks/master/trademark/edit-trademark';
+import useDeleteTrademark from 'src/hooks/master/trademark/delete-trademark';
 
 const { Title, Text } = Typography;
 
 export default function MasterTrademarkPage() {
   const [trademarkList, setTrademarkList] = useState<unknown[]>([]);
   const { addTrademarkForm, handleShowAddTrademarkForm } = useAddTrademark({});
+  const { editTrademarkForm, handleShowEditTrademarkForm } = useEditTrademark({});
+  const { deleteTrademarkModal, handleShowDeleteTrademarkModal } = useDeleteTrademark({});
   const { sort, filters, pagination, showFiltersForm, toolbar, filtersForm, paginationDisplay } = useToolbar({
     initialSort: DEFAULT_SORT,
     sortOptions: TRADEMARK_SORT_OPTIONS,
@@ -42,11 +46,15 @@ export default function MasterTrademarkPage() {
     },
     {
       fixed: 'right',
-      render: (_: unknown, record: unknown) => {
+      render: (_: unknown, record: Record<string, unknown>) => {
+        const { trademark_code, trademark } = record || {};
         return (
           <div className={styles.editAnDeleteContainer}>
-            <Button icon={<IconEdit />} onClick={() => console.log(record)} />
-            <Button icon={<IconDelete />} onClick={() => console.log(record)} />
+            <Button icon={<IconEdit />} onClick={() => handleShowEditTrademarkForm({ trademark_code, trademark })} />
+            <Button
+              icon={<IconDelete />}
+              onClick={() => handleShowDeleteTrademarkModal([{ trademark_code, trademark }])}
+            />
           </div>
         );
       },
@@ -186,6 +194,8 @@ export default function MasterTrademarkPage() {
         {paginationDisplay}
       </div>
       {addTrademarkForm}
+      {editTrademarkForm}
+      {deleteTrademarkModal}
     </div>
   );
 }
