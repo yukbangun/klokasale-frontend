@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ELocalStorageKey } from 'src/constants/local-storage';
 import { ENavigation, navigationToLabelMap } from 'src/constants/navigation';
 import { EMasterNavigation, masterNavigationToLabelMap } from 'src/constants/navigation/master';
-import styles from './index.module.scss';
 import { TNavigation } from 'src/types/navigation';
+import styles from './index.module.scss';
 
 const { Text } = Typography;
 
