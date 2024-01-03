@@ -25,6 +25,7 @@ export default function NavigationBar() {
         text: masterNavigationToLabelMap[masterNav],
       })),
     },
+    { itemKey: ENavigation.User, text: navigationToLabelMap[ENavigation.User] },
   ];
 
   const storeGroupTreeData = [

@@ -3,6 +3,7 @@ import LoginPage from './pages/login';
 import DashboardPage from './pages/dashboard';
 import MasterBarangPage from './pages/master/barang';
 import MasterTrademarkPage from './pages/master/trademark';
+import UserPage from './pages/user';
 
 function App() {
   const router = createBrowserRouter([
@@ -54,6 +55,10 @@ function App() {
               element: <div>hutang</div>,
             },
           ],
+        },
+        {
+          path: 'user',
+          element: <UserPage />,
         },
       ],
     },
