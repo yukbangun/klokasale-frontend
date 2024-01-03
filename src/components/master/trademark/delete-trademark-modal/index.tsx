@@ -17,7 +17,6 @@ type TProps = {
 export default function DeleteTrademarkModal(props: TProps) {
   const { valueList, isVisible, onCancel } = props;
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const shouldDisableDeleteBtn = isNullish(valueList) || valueList?.length === 0;
 
   function handleDeleteTrademark(values: unknown) {
