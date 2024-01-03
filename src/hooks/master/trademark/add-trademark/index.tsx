@@ -2,11 +2,11 @@ import { useState } from 'react';
 import AddTrademarkForm from 'src/components/master/trademark/add-trademark-form';
 
 type TProps = {
-  handleOnSubmitSuccess?: () => void;
+  onSubmitSuccess?: () => void;
 };
 
 export default function useAddTrademark(props: TProps) {
-  const { handleOnSubmitSuccess } = props;
+  const { onSubmitSuccess } = props;
   const [isAddTrademarkFormVisible, setIsAddTrademarkFormVisible] = useState(false);
 
   function handleShowAddTrademarkForm() {
@@ -21,7 +21,7 @@ export default function useAddTrademark(props: TProps) {
     <AddTrademarkForm
       isVisible={isAddTrademarkFormVisible}
       onCancel={handleCloseAddTrademarkForm}
-      onSubmitSuccess={handleOnSubmitSuccess}
+      onSubmitSuccess={onSubmitSuccess}
     />
   );
 

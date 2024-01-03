@@ -37,7 +37,7 @@ export default function AddTrademarkForm(props: TProps) {
       <Form className={styles.trademarkForm} onSubmit={handleAddTrademark}>
         <Form.Input
           rules={[{ required: true, message: 'kode trademark harus diisi' }]}
-          field="trademark_code"
+          field="trademarkCode"
           label="Kode Trademark"
           placeholder="Masukkan kode trademark"
         />
