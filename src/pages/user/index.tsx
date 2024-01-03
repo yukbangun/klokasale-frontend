@@ -14,14 +14,16 @@ import useDeleteTrademark from 'src/hooks/master/trademark/delete-trademark';
 import useAddUser from 'src/hooks/user/add-user';
 import { USER_SORT_OPTIONS } from 'src/constants/user/sort';
 import { USERNAME_FILTER_FIELDS } from 'src/constants/user/filter';
+import useEditUser from 'src/hooks/user/edit-user';
+import useDeleteUser from 'src/hooks/user/delete-user';
 
 const { Title, Text } = Typography;
 
 export default function UserPage() {
   const [userList, setUserList] = useState<unknown[]>([]);
   const { addUserForm, handleShowAddUserForm } = useAddUser({});
-  // const { editTrademarkForm, handleShowEditTrademarkForm } = useEditTrademark({});
-  // const { deleteTrademarkModal, handleShowDeleteTrademarkModal } = useDeleteTrademark({});
+  const { editUserForm, handleShowEditUserForm } = useEditUser({});
+  const { deleteUserModal, handleShowDeleteUserModal } = useDeleteUser({});
   const { sort, filters, pagination, showFiltersForm, toolbar, filtersForm, paginationDisplay } = useToolbar({
     initialSort: DEFAULT_SORT,
     sortOptions: USER_SORT_OPTIONS,
@@ -64,14 +66,17 @@ export default function UserPage() {
     {
       fixed: 'right',
       render: (_: unknown, record: Record<string, unknown>) => {
-        const { trademark_code, trademark } = record || {};
+        const { username, name, address, phoneNumber } = record || {};
         return (
           <div className={styles.editAndDeleteContainer}>
-            {/* <Button icon={<IconEdit />} onClick={() => handleShowEditTrademarkForm({ trademark_code, trademark })} />
+            <Button
+              icon={<IconEdit />}
+              onClick={() => handleShowEditUserForm({ username, name, address, phoneNumber })}
+            />
             <Button
               icon={<IconDelete />}
-              onClick={() => handleShowDeleteTrademarkModal([{ trademark_code, trademark }])}
-            /> */}
+              onClick={() => handleShowDeleteUserModal([{ username, name, address, phoneNumber }])}
+            />
           </div>
         );
       },
@@ -96,7 +101,7 @@ export default function UserPage() {
           dataSource={[
             {
               username: 'bambang1234',
-              name: 'Bambang',
+              name: 'Bambang dhsfjhdnfkdgn ghldsjgnlhdgksfndg fhgojsngjk .dslghsjkn,gsfluigh,bsjf ghglik,dfbgliudkjfg',
               phoneNumber: '+6282162174879',
               address: 'Jl. Soekarno No 102B',
             },
@@ -213,8 +218,8 @@ export default function UserPage() {
         {paginationDisplay}
       </div>
       {addUserForm}
-      {/* {editTrademarkForm}
-      {deleteTrademarkModal} */}
+      {editUserForm}
+      {deleteUserModal}
     </div>
   );
 }
