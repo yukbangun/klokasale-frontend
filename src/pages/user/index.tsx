@@ -4,7 +4,7 @@ import { Button, Empty, Table, Tooltip, Typography } from '@douyinfe/semi-ui';
 import { ColumnProps } from '@douyinfe/semi-ui/lib/es/table';
 import { useEffect, useState } from 'react';
 import { DEFAULT_SORT } from 'src/constants/sort';
-import { USERNAME_FILTER_FIELDS } from 'src/constants/user/filter';
+import { USER_FILTER_FIELDS } from 'src/constants/user/filter';
 import { USER_SORT_OPTIONS } from 'src/constants/user/sort';
 import useToolbar from 'src/hooks/toolbar';
 import useAddUser from 'src/hooks/user/add-user';
@@ -25,7 +25,7 @@ export default function UserPage() {
     initialSort: DEFAULT_SORT,
     sortOptions: USER_SORT_OPTIONS,
     initialFilters: { username: undefined, name: undefined },
-    filterFields: USERNAME_FILTER_FIELDS,
+    filterFields: USER_FILTER_FIELDS,
     addNewDataLabel: 'Tambah User',
     onClickAddNewData: handleShowAddUserForm,
     initialPagination: { page: 1 },
