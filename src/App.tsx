@@ -4,6 +4,7 @@ import DashboardPage from './pages/dashboard';
 import MasterBarangPage from './pages/master/barang';
 import MasterTrademarkPage from './pages/master/trademark';
 import UserPage from './pages/user';
+import ShopPage from './pages/shop';
 
 function App() {
   const router = createBrowserRouter([
@@ -59,6 +60,10 @@ function App() {
         {
           path: 'user',
           element: <UserPage />,
+        },
+        {
+          path: 'shop',
+          element: <ShopPage />,
         },
       ],
     },
