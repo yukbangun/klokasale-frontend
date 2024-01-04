@@ -4,11 +4,11 @@ import { TSortOption } from 'src/types/sort';
 export const TRADEMARK_SORT_OPTIONS: TSortOption[] = [
   { value: DEFAULT_SORT, label: DEFAULT_SORT_LABEL },
   {
-    value: { field: 'trademark_code', direction: ESortDirection.Asc },
+    value: { field: 'trademarkCode', direction: ESortDirection.Asc },
     label: 'Kode Trademark Asc',
   },
   {
-    value: { field: 'trademark_code', direction: ESortDirection.Desc },
+    value: { field: 'trademarkCode', direction: ESortDirection.Desc },
     label: 'Kode Trademark Desc',
   },
   {

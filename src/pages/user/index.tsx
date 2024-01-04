@@ -3,24 +3,24 @@ import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
 import { Button, Empty, Table, Tooltip, Typography } from '@douyinfe/semi-ui';
 import { ColumnProps } from '@douyinfe/semi-ui/lib/es/table';
 import { useEffect, useState } from 'react';
-import { TRADEMARK_FILTER_FIELDS } from 'src/constants/master/trademark/filter';
-import { TRADEMARK_SORT_OPTIONS } from 'src/constants/master/trademark/sort';
 import { DEFAULT_SORT } from 'src/constants/sort';
-import useAddTrademark from 'src/hooks/master/trademark/add-trademark';
-import useToolbar from 'src/hooks/toolbar';
-import styles from './index.module.scss';
-import useEditTrademark from 'src/hooks/master/trademark/edit-trademark';
-import useDeleteTrademark from 'src/hooks/master/trademark/delete-trademark';
-import useAddUser from 'src/hooks/user/add-user';
+import { USER_FILTER_FIELDS } from 'src/constants/user/filter';
 import { USER_SORT_OPTIONS } from 'src/constants/user/sort';
-import { USERNAME_FILTER_FIELDS } from 'src/constants/user/filter';
-import useEditUser from 'src/hooks/user/edit-user';
+import useToolbar from 'src/hooks/toolbar';
+import useAddUser from 'src/hooks/user/add-user';
 import useDeleteUser from 'src/hooks/user/delete-user';
+import useEditUser from 'src/hooks/user/edit-user';
 import useResetUserPassword from 'src/hooks/user/reset-user-password';
+import styles from './index.module.scss';
+import { isValidNumber } from 'src/utils/number';
+import { ELocalStorageKey } from 'src/constants/local-storage';
 
 const { Title, Text } = Typography;
 
 export default function UserPage() {
+  const localStoragePageSize = localStorage.getItem(ELocalStorageKey.PageSize);
+  const isLocalStoragePageSizeValidNumber = isValidNumber(localStoragePageSize || '');
+
   const [userList, setUserList] = useState<unknown[]>([]);
   const { addUserForm, handleShowAddUserForm } = useAddUser({});
   const { editUserForm, handleShowEditUserForm } = useEditUser({});
@@ -30,10 +30,10 @@ export default function UserPage() {
     initialSort: DEFAULT_SORT,
     sortOptions: USER_SORT_OPTIONS,
     initialFilters: { username: undefined, name: undefined },
-    filterFields: USERNAME_FILTER_FIELDS,
+    filterFields: USER_FILTER_FIELDS,
     addNewDataLabel: 'Tambah User',
     onClickAddNewData: handleShowAddUserForm,
-    initialPagination: { page: 1 },
+    initialPagination: { page: 1, pageSize: isLocalStoragePageSizeValidNumber ? Number(localStoragePageSize) : 10 },
   });
 
   const columns: ColumnProps[] = [
@@ -214,10 +214,7 @@ export default function UserPage() {
             },
           ]}
           empty={
-            <Empty
-              image={<IllustrationNoContent className={styles.noDataDisplay} />}
-              description={'Belum ada trademark'}
-            />
+            <Empty image={<IllustrationNoContent className={styles.noDataDisplay} />} description={'Belum ada user'} />
           }
         />
         {paginationDisplay}

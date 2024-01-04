@@ -4,11 +4,11 @@ import EditTrademarkForm from 'src/components/master/trademark/edit-trademark-fo
 import { isNullish } from 'src/utils/nullish';
 
 type TProps = {
-  handleOnSubmitSuccess?: () => void;
+  onSubmitSuccess?: () => void;
 };
 
 export default function useEditTrademark(props: TProps) {
-  const { handleOnSubmitSuccess } = props;
+  const { onSubmitSuccess } = props;
   const [trademarkValues, setTrademarkValues] = useState<Record<string, unknown>>();
   const [isEditTrademarkFormVisible, setIsEditTrademarkFormVisible] = useState(false);
 
@@ -31,7 +31,7 @@ export default function useEditTrademark(props: TProps) {
       values={trademarkValues}
       isVisible={isEditTrademarkFormVisible}
       onCancel={handleCloseEditTrademarkForm}
-      onSubmitSuccess={handleOnSubmitSuccess}
+      onSubmitSuccess={onSubmitSuccess}
     />
   );
 

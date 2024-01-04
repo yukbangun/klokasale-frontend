@@ -17,7 +17,6 @@ type TProps = {
 export default function DeleteTrademarkModal(props: TProps) {
   const { valueList, isVisible, onCancel } = props;
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const shouldDisableDeleteBtn = isNullish(valueList) || valueList?.length === 0;
 
   function handleDeleteTrademark(values: unknown) {
@@ -34,7 +33,7 @@ export default function DeleteTrademarkModal(props: TProps) {
   const columns: ColumnProps[] = [
     {
       title: 'Kode Trademark',
-      dataIndex: 'trademark_code',
+      dataIndex: 'trademarkCode',
       width: 150,
       render: text => {
         return <Text ellipsis={{ showTooltip: true }}>{text}</Text>;
