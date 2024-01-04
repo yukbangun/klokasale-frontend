@@ -12,10 +12,15 @@ import useDeleteUser from 'src/hooks/user/delete-user';
 import useEditUser from 'src/hooks/user/edit-user';
 import useResetUserPassword from 'src/hooks/user/reset-user-password';
 import styles from './index.module.scss';
+import { isValidNumber } from 'src/utils/number';
+import { ELocalStorageKey } from 'src/constants/local-storage';
 
 const { Title, Text } = Typography;
 
 export default function UserPage() {
+  const localStoragePageSize = localStorage.getItem(ELocalStorageKey.PageSize);
+  const isLocalStoragePageSizeValidNumber = isValidNumber(localStoragePageSize || '');
+
   const [userList, setUserList] = useState<unknown[]>([]);
   const { addUserForm, handleShowAddUserForm } = useAddUser({});
   const { editUserForm, handleShowEditUserForm } = useEditUser({});
@@ -28,7 +33,7 @@ export default function UserPage() {
     filterFields: USER_FILTER_FIELDS,
     addNewDataLabel: 'Tambah User',
     onClickAddNewData: handleShowAddUserForm,
-    initialPagination: { page: 1 },
+    initialPagination: { page: 1, pageSize: isLocalStoragePageSizeValidNumber ? Number(localStoragePageSize) : 10 },
   });
 
   const columns: ColumnProps[] = [
