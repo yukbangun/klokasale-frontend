@@ -11,10 +11,15 @@ import useToolbar from 'src/hooks/toolbar';
 import styles from './index.module.scss';
 import useEditTrademark from 'src/hooks/master/trademark/edit-trademark';
 import useDeleteTrademark from 'src/hooks/master/trademark/delete-trademark';
+import { ELocalStorageKey } from 'src/constants/local-storage';
+import { isValidNumber } from 'src/utils/number';
 
 const { Title, Text } = Typography;
 
 export default function MasterTrademarkPage() {
+  const localStoragePageSize = localStorage.getItem(ELocalStorageKey.PageSize);
+  const isLocalStoragePageSizeValidNumber = isValidNumber(localStoragePageSize || '');
+
   const [trademarkList, setTrademarkList] = useState<unknown[]>([]);
   const { addTrademarkForm, handleShowAddTrademarkForm } = useAddTrademark({});
   const { editTrademarkForm, handleShowEditTrademarkForm } = useEditTrademark({});
@@ -22,17 +27,17 @@ export default function MasterTrademarkPage() {
   const { sort, filters, pagination, showFiltersForm, toolbar, filtersForm, paginationDisplay } = useToolbar({
     initialSort: DEFAULT_SORT,
     sortOptions: TRADEMARK_SORT_OPTIONS,
-    initialFilters: { trademark: undefined, trademark_code: undefined },
+    initialFilters: { trademark: undefined, trademarkCode: undefined },
     filterFields: TRADEMARK_FILTER_FIELDS,
     addNewDataLabel: 'Tambah Trademark',
     onClickAddNewData: handleShowAddTrademarkForm,
-    initialPagination: { page: 1 },
+    initialPagination: { page: 1, pageSize: isLocalStoragePageSizeValidNumber ? Number(localStoragePageSize) : 10 },
   });
 
   const columns: ColumnProps[] = [
     {
       title: 'Kode Trademark',
-      dataIndex: 'trademark_code',
+      dataIndex: 'trademarkCode',
       render: text => {
         return <Text ellipsis={{ showTooltip: true }}>{text}</Text>;
       },
@@ -47,13 +52,13 @@ export default function MasterTrademarkPage() {
     {
       fixed: 'right',
       render: (_: unknown, record: Record<string, unknown>) => {
-        const { trademark_code, trademark } = record || {};
+        const { trademarkCode, trademark } = record || {};
         return (
-          <div className={styles.editAnDeleteContainer}>
-            <Button icon={<IconEdit />} onClick={() => handleShowEditTrademarkForm({ trademark_code, trademark })} />
+          <div className={styles.editAndDeleteContainer}>
+            <Button icon={<IconEdit />} onClick={() => handleShowEditTrademarkForm({ trademarkCode, trademark })} />
             <Button
               icon={<IconDelete />}
-              onClick={() => handleShowDeleteTrademarkModal([{ trademark_code, trademark }])}
+              onClick={() => handleShowDeleteTrademarkModal([{ trademarkCode, trademark }])}
             />
           </div>
         );
@@ -61,8 +66,8 @@ export default function MasterTrademarkPage() {
     },
   ];
 
-  function getTrademarks() {}
-  function updateTrademarks() {}
+  function getTrademarkList() {}
+  function updateTrademarkList() {}
 
   useEffect(() => {}, []);
 
@@ -78,108 +83,108 @@ export default function MasterTrademarkPage() {
           pagination={false}
           dataSource={[
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark:
                 'Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun Angsa Anggun',
               key: 0,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 1,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 2,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 3,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 4,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 5,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 6,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 7,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 8,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 9,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 10,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 11,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 12,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 13,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 14,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 15,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 16,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 17,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 18,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 19,
             },
             {
-              trademark_code: 'AA',
+              trademarkCode: 'AA',
               trademark: 'Angsa Anggun',
               key: 20,
             },
