@@ -1,31 +1,25 @@
-import { IconDelete, IconEdit, IconLock } from '@douyinfe/semi-icons';
+import { IconDelete, IconEdit } from '@douyinfe/semi-icons';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
-import { Button, Empty, Table, Tooltip, Typography } from '@douyinfe/semi-ui';
+import { Button, Empty, Table, Typography } from '@douyinfe/semi-ui';
 import { ColumnProps } from '@douyinfe/semi-ui/lib/es/table';
 import { useEffect, useState } from 'react';
-import { TRADEMARK_FILTER_FIELDS } from 'src/constants/master/trademark/filter';
-import { TRADEMARK_SORT_OPTIONS } from 'src/constants/master/trademark/sort';
-import { DEFAULT_SORT } from 'src/constants/sort';
-import useAddTrademark from 'src/hooks/master/trademark/add-trademark';
-import useToolbar from 'src/hooks/toolbar';
-import styles from './index.module.scss';
-import useEditTrademark from 'src/hooks/master/trademark/edit-trademark';
-import useDeleteTrademark from 'src/hooks/master/trademark/delete-trademark';
-import useAddUser from 'src/hooks/user/add-user';
-import { USER_SORT_OPTIONS } from 'src/constants/user/sort';
-import { USERNAME_FILTER_FIELDS } from 'src/constants/user/filter';
-import useEditUser from 'src/hooks/user/edit-user';
-import useDeleteUser from 'src/hooks/user/delete-user';
-import useResetUserPassword from 'src/hooks/user/reset-user-password';
-import useAddShop from 'src/hooks/shop/add-shop';
-import { SHOP_SORT_OPTIONS } from 'src/constants/shop/sort';
+import { ELocalStorageKey } from 'src/constants/local-storage';
 import { SHOP_FILTER_FIELDS } from 'src/constants/shop/filter';
-import useEditShop from 'src/hooks/shop/edit-shop';
+import { SHOP_SORT_OPTIONS } from 'src/constants/shop/sort';
+import { DEFAULT_SORT } from 'src/constants/sort';
+import useAddShop from 'src/hooks/shop/add-shop';
 import useDeleteShop from 'src/hooks/shop/delete-shop';
+import useEditShop from 'src/hooks/shop/edit-shop';
+import useToolbar from 'src/hooks/toolbar';
+import { isValidNumber } from 'src/utils/number';
+import styles from './index.module.scss';
 
 const { Title, Text } = Typography;
 
 export default function ShopPage() {
+  const localStoragePageSize = localStorage.getItem(ELocalStorageKey.PageSize);
+  const isLocalStoragePageSizeValidNumber = isValidNumber(localStoragePageSize || '');
+
   const [shopList, setShopList] = useState<unknown[]>([]);
   const { addShopForm, handleShowAddShopForm } = useAddShop({});
   const { editShopForm, handleShowEditShopForm } = useEditShop({});
@@ -37,7 +31,7 @@ export default function ShopPage() {
     filterFields: SHOP_FILTER_FIELDS,
     addNewDataLabel: 'Tambah Toko',
     onClickAddNewData: handleShowAddShopForm,
-    initialPagination: { page: 1 },
+    initialPagination: { page: 1, pageSize: isLocalStoragePageSizeValidNumber ? Number(localStoragePageSize) : 10 },
   });
 
   const columns: ColumnProps[] = [
