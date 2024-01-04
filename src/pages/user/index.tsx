@@ -1,6 +1,6 @@
-import { IconDelete, IconEdit } from '@douyinfe/semi-icons';
+import { IconDelete, IconEdit, IconLock } from '@douyinfe/semi-icons';
 import { IllustrationNoContent } from '@douyinfe/semi-illustrations';
-import { Button, Empty, Table, Typography } from '@douyinfe/semi-ui';
+import { Button, Empty, Table, Tooltip, Typography } from '@douyinfe/semi-ui';
 import { ColumnProps } from '@douyinfe/semi-ui/lib/es/table';
 import { useEffect, useState } from 'react';
 import { TRADEMARK_FILTER_FIELDS } from 'src/constants/master/trademark/filter';
@@ -16,6 +16,7 @@ import { USER_SORT_OPTIONS } from 'src/constants/user/sort';
 import { USERNAME_FILTER_FIELDS } from 'src/constants/user/filter';
 import useEditUser from 'src/hooks/user/edit-user';
 import useDeleteUser from 'src/hooks/user/delete-user';
+import useResetUserPassword from 'src/hooks/user/reset-user-password';
 
 const { Title, Text } = Typography;
 
@@ -24,6 +25,7 @@ export default function UserPage() {
   const { addUserForm, handleShowAddUserForm } = useAddUser({});
   const { editUserForm, handleShowEditUserForm } = useEditUser({});
   const { deleteUserModal, handleShowDeleteUserModal } = useDeleteUser({});
+  const { resetUserPasswordForm, handleShowResetUserPasswordForm } = useResetUserPassword({});
   const { sort, filters, pagination, showFiltersForm, toolbar, filtersForm, paginationDisplay } = useToolbar({
     initialSort: DEFAULT_SORT,
     sortOptions: USER_SORT_OPTIONS,
@@ -77,6 +79,9 @@ export default function UserPage() {
               icon={<IconDelete />}
               onClick={() => handleShowDeleteUserModal([{ username, name, address, phoneNumber }])}
             />
+            <Tooltip content="Reset Password">
+              <Button icon={<IconLock />} onClick={() => handleShowResetUserPasswordForm(username as string)} />
+            </Tooltip>
           </div>
         );
       },
@@ -220,6 +225,7 @@ export default function UserPage() {
       {addUserForm}
       {editUserForm}
       {deleteUserModal}
+      {resetUserPasswordForm}
     </div>
   );
 }
