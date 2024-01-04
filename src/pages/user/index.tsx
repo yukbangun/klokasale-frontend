@@ -209,10 +209,7 @@ export default function UserPage() {
             },
           ]}
           empty={
-            <Empty
-              image={<IllustrationNoContent className={styles.noDataDisplay} />}
-              description={'Belum ada trademark'}
-            />
+            <Empty image={<IllustrationNoContent className={styles.noDataDisplay} />} description={'Belum ada user'} />
           }
         />
         {paginationDisplay}
