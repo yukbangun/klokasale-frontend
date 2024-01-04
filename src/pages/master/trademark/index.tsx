@@ -11,10 +11,15 @@ import useToolbar from 'src/hooks/toolbar';
 import styles from './index.module.scss';
 import useEditTrademark from 'src/hooks/master/trademark/edit-trademark';
 import useDeleteTrademark from 'src/hooks/master/trademark/delete-trademark';
+import { ELocalStorageKey } from 'src/constants/local-storage';
+import { isValidNumber } from 'src/utils/number';
 
 const { Title, Text } = Typography;
 
 export default function MasterTrademarkPage() {
+  const localStoragePageSize = localStorage.getItem(ELocalStorageKey.PageSize);
+  const isLocalStoragePageSizeValidNumber = isValidNumber(localStoragePageSize || '');
+
   const [trademarkList, setTrademarkList] = useState<unknown[]>([]);
   const { addTrademarkForm, handleShowAddTrademarkForm } = useAddTrademark({});
   const { editTrademarkForm, handleShowEditTrademarkForm } = useEditTrademark({});
@@ -26,7 +31,7 @@ export default function MasterTrademarkPage() {
     filterFields: TRADEMARK_FILTER_FIELDS,
     addNewDataLabel: 'Tambah Trademark',
     onClickAddNewData: handleShowAddTrademarkForm,
-    initialPagination: { page: 1 },
+    initialPagination: { page: 1, pageSize: isLocalStoragePageSizeValidNumber ? Number(localStoragePageSize) : 10 },
   });
 
   const columns: ColumnProps[] = [

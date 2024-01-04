@@ -3,6 +3,8 @@ import LoginPage from './pages/login';
 import DashboardPage from './pages/dashboard';
 import MasterBarangPage from './pages/master/barang';
 import MasterTrademarkPage from './pages/master/trademark';
+import { LocaleProvider } from '@douyinfe/semi-ui';
+import id_ID from '@douyinfe/semi-ui/lib/es/locale/source/id_ID';
 
 function App() {
   const router = createBrowserRouter([
@@ -63,7 +65,11 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <LocaleProvider locale={id_ID}>
+      <RouterProvider router={router} />
+    </LocaleProvider>
+  );
 }
 
 export default App;

@@ -8,6 +8,7 @@ import { TFilterField } from 'src/types/filter';
 import { TPagination } from 'src/types/pagination';
 import { TSort, TSortOption } from 'src/types/sort';
 import styles from './index.module.scss';
+import { ELocalStorageKey } from 'src/constants/local-storage';
 
 type TProps = {
   initialSort: TSort;
@@ -69,6 +70,10 @@ export default function useToolbar(props: TProps) {
     onChangePagination?.(pagination);
   }
 
+  function handleChangePageSize(pageSize: number) {
+    localStorage.setItem(ELocalStorageKey.PageSize, `${pageSize}`);
+  }
+
   const toolbar = (
     <div className={styles.toolbar}>
       <div className={styles.sortAndFilter}>
@@ -107,9 +112,12 @@ export default function useToolbar(props: TProps) {
     <Pagination
       total={80}
       currentPage={pagination.page}
+      pageSize={pagination.pageSize}
       className={styles.pagination}
       popoverPosition="top"
       onChange={handleChangePagination}
+      onPageSizeChange={handleChangePageSize}
+      showSizeChanger
     ></Pagination>
   );
 
