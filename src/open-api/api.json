@@ -1,0 +1,476 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Klokasale backend server api.",
+    "title": "Klokasale",
+    "contact": {},
+    "version": "2.0"
+  },
+  "host": "localhost:8080/",
+  "basePath": "api",
+  "paths": {
+    "/v1/shops": {
+      "get": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["shops"],
+        "summary": "Get Shop",
+        "operationId": "GetShops",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "pageNumber",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "name": "pageSize",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "name": "shopGroupId",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "sortBy",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "name": "sortOrder",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/common.SuccessResponse"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "$ref": "#/definitions/shop.GetShopResp"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["shops"],
+        "summary": "Create Shop",
+        "operationId": "CreateShop",
+        "parameters": [
+          {
+            "description": "Create Shop Request Body",
+            "name": "CreateShopRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/shop.CreateShopReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/common.SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/shops/{id}": {
+      "put": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["shops"],
+        "summary": "Update Shop",
+        "operationId": "UpdateShop",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "shop id",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update Shop Request Body",
+            "name": "UpdateShopReq",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/shop.UpdateShopReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/common.SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["shops"],
+        "summary": "Update Shop",
+        "operationId": "DeleteShop",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "shop id",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Delete Shop Request Body",
+            "name": "DeleteShopReq",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/shop.DeleteShopReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/common.SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/login": {
+      "post": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["users"],
+        "summary": "User Login",
+        "operationId": "userLogin",
+        "parameters": [
+          {
+            "description": "Login Request Body",
+            "name": "LoginRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user.UserLoginReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/common.SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/register": {
+      "post": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["users"],
+        "summary": "User Login",
+        "operationId": "userRegister",
+        "parameters": [
+          {
+            "description": "Register Request Body",
+            "name": "LoginRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user.UserRegisterReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/common.SuccessResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/common.ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "common.ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "can be custom error if necessary",
+              "type": "integer"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "common.Pagination": {
+      "type": "object",
+      "properties": {
+        "pageNumber": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        },
+        "totalPage": {
+          "type": "integer"
+        },
+        "totalRecordCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "common.SuccessResponse": {
+      "type": "object",
+      "properties": {
+        "data": {}
+      }
+    },
+    "shop.CreateShopReq": {
+      "type": "object",
+      "required": ["name", "shopGroupId"],
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "shopGroupId": {
+          "type": "integer"
+        }
+      }
+    },
+    "shop.DeleteShopReq": {
+      "type": "object",
+      "required": ["shopGroupId"],
+      "properties": {
+        "shopGroupId": {
+          "type": "integer"
+        }
+      }
+    },
+    "shop.GetShopResp": {
+      "type": "object",
+      "properties": {
+        "pagination": {
+          "$ref": "#/definitions/common.Pagination"
+        },
+        "shops": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/shop.ShopResp"
+          }
+        }
+      }
+    },
+    "shop.ShopResp": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "shopGroupId": {
+          "type": "integer"
+        }
+      }
+    },
+    "shop.UpdateShopReq": {
+      "type": "object",
+      "required": ["name", "shopGroupId"],
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "shopGroupId": {
+          "type": "integer"
+        }
+      }
+    },
+    "user.UserLoginReq": {
+      "type": "object",
+      "required": ["password", "username"],
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "user.UserRegisterReq": {
+      "type": "object",
+      "required": ["confirmPassword", "name", "password", "username"],
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "confirmPassword": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

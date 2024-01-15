@@ -1,26 +1,45 @@
-import { Button, Form, Modal, Spin, Typography } from '@douyinfe/semi-ui';
+import { Button, Form, Modal, Spin, Toast, Typography } from '@douyinfe/semi-ui';
 import { useState } from 'react';
 import styles from './index.module.scss';
+import { ShopShopResp, ShopUpdateShopReq, ShopsApi } from 'src/services';
+import { axiosInstance } from 'src/constants/axios';
+import { TError } from 'src/types/error';
+import { isNullish } from 'src/utils/nullish';
 
 const { Title } = Typography;
 
 type TProps = {
-  values?: Record<string, unknown>;
+  values?: Partial<ShopShopResp>;
   isVisible: boolean;
   onCancel: () => void;
   onSubmitSuccess?: () => void;
 };
 
 export default function EditShopForm(props: TProps) {
-  const { values, isVisible, onCancel } = props;
+  const { values, isVisible, onCancel, onSubmitSuccess } = props;
+  const { id } = values || {};
+  const hasId = !isNullish(id);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleEditShop(values: Record<string, unknown>) {
+  async function handleEditShop(formValues: Omit<ShopUpdateShopReq, 'shopGroupId'>) {
+    if (!hasId) {
+      onCancel();
+      Toast.error('Terjadi kesalahan, shop id tidak ditemukan');
+      return;
+    }
     try {
-      // TODO: handle submit shop
       setIsSubmitting(true);
+      const shopApi = new ShopsApi(undefined, undefined, axiosInstance);
+      await shopApi.updateShop(id, { ...formValues, shopGroupId: 1 });
+      Toast.success('Shop berhasil diubah');
+      onCancel();
+      onSubmitSuccess?.();
     } catch (e) {
-      // TODO: show error toast
+      const { response } = e as TError;
+      const { data } = response || {};
+      const { error } = data || {};
+      const { message } = error || {};
+      Toast.error(message);
     } finally {
       setIsSubmitting(false);
     }

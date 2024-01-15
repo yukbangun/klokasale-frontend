@@ -110,7 +110,7 @@ export default function useToolbar(props: TProps) {
 
   const paginationDisplay = (
     <Pagination
-      total={80}
+      total={pagination.total}
       currentPage={pagination.page}
       pageSize={pagination.pageSize}
       className={styles.pagination}
@@ -121,5 +121,5 @@ export default function useToolbar(props: TProps) {
     ></Pagination>
   );
 
-  return { sort, filters, pagination, showFiltersForm, toolbar, filtersForm, paginationDisplay };
+  return { sort, pagination, setPagination, paginationDisplay, filters, showFiltersForm, filtersForm, toolbar };
 }

@@ -4,11 +4,11 @@ import DeleteShopModal from 'src/components/shop/delete-shop-form';
 import { isNullish } from 'src/utils/nullish';
 
 type TProps = {
-  handleOnConfirm?: () => void;
+  onSubmitSuccess?: () => void;
 };
 
 export default function useDeleteShop(props: TProps) {
-  const { handleOnConfirm } = props;
+  const { onSubmitSuccess } = props;
   const [shopValueList, setShopValueList] = useState<Record<string, unknown>[]>();
   const [isDeleteShopFormVisible, setIsDeleteShopFormVisible] = useState(false);
 
@@ -31,7 +31,7 @@ export default function useDeleteShop(props: TProps) {
       valueList={shopValueList}
       isVisible={isDeleteShopFormVisible}
       onCancel={handleCloseDeleteShopModal}
-      onConfirm={handleOnConfirm}
+      onSubmitSuccess={onSubmitSuccess}
     />
   );
 
