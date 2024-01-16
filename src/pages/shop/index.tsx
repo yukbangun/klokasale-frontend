@@ -133,8 +133,8 @@ export default function ShopPage() {
   }
 
   useEffect(() => {
-    updateShopList();
-  }, [sort, pagination?.page, filters]);
+    updateShopList?.();
+  }, [pagination.page, pagination.pageSize, filters, sort]);
 
   const firstLoadDisplay = isLoading ? (
     <div className={styles.firstLoadDisplay}>
