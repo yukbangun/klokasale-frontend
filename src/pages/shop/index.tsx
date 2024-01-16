@@ -61,6 +61,23 @@ export default function ShopPage() {
       },
     },
     {
+      title: 'Tanggal Dibuat',
+      dataIndex: 'createdAt',
+      render: text => {
+        const date = new Date(text);
+        const stringifiedDate = date.toLocaleString('id-ID', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+        });
+        return <Text ellipsis={{ showTooltip: true }}>{stringifiedDate}</Text>;
+      },
+    },
+    {
       fixed: 'right',
       render: (_: unknown, record: ShopShopResp) => {
         const { id, name, address } = record || {};
@@ -175,7 +192,6 @@ export default function ShopPage() {
       case EShopState.NoPermission:
         return noPermissionDisplay;
       case EShopState.Fail:
-      // return errorDisplay;
       case EShopState.NoResult:
       case EShopState.HasResult:
         return shopListDisplay;

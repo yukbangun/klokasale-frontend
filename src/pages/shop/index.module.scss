@@ -10,9 +10,11 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    flex: 1;
 
     .shopTable {
       overflow: auto;
+      flex: 1;
 
       .editAndDeleteContainer {
         display: flex;
@@ -26,10 +28,14 @@
         height: 150px;
       }
     }
+
+    .errorDisplayContainer {
+      flex: 1;
+      padding-top: 40px;
+    }
   }
 }
 
-.noPermissionDisplayContainer,
-.errorDisplayContainer {
+.noPermissionDisplayContainer {
   padding-top: 40px;
 }
