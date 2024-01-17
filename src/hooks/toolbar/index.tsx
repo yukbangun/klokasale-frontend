@@ -1,7 +1,7 @@
 import { IconFilter, IconPlus } from '@douyinfe/semi-icons';
 import { Button, Form, Pagination } from '@douyinfe/semi-ui';
 import { FormApi } from '@douyinfe/semi-ui/lib/es/form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ButtonDropdown from 'src/components/dropdown-button';
 import FilterFields from 'src/components/filter-fields';
 import { TFilterField } from 'src/types/filter';
