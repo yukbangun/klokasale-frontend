@@ -1,0 +1,27 @@
+.deleteUserModal {
+
+  .deleteUserTable {
+    margin: 12px 0;
+
+    .noDataDisplay {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .btnContainer {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  :global {
+    .semi-modal-content {
+      padding: 24px;
+    }
+
+    .semi-table {
+      table-layout: fixed;
+    }
+  }
+}

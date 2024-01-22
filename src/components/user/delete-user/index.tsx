@@ -14,14 +14,15 @@ type TProps = {
   onConfirm?: () => void;
 };
 
-export default function DeleteTrademarkModal(props: TProps) {
+export default function DeleteUserModal(props: TProps) {
   const { valueList, isVisible, onCancel } = props;
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const shouldDisableDeleteBtn = isNullish(valueList) || valueList?.length === 0;
 
-  function handleDeleteTrademark(values: unknown) {
+  function handleDeleteUser(values: unknown) {
     try {
-      // TODO: handle submit trademark
+      // TODO: handle submit user
       setIsSubmitting(true);
     } catch (e) {
       // TODO: show error toast
@@ -32,16 +33,29 @@ export default function DeleteTrademarkModal(props: TProps) {
 
   const columns: ColumnProps[] = [
     {
-      title: 'Kode Trademark',
-      dataIndex: 'trademarkCode',
-      width: 150,
+      title: 'Username',
+      dataIndex: 'username',
       render: text => {
         return <Text ellipsis={{ showTooltip: true }}>{text}</Text>;
       },
     },
     {
-      title: 'Trademark',
-      dataIndex: 'trademark',
+      title: 'Nama',
+      dataIndex: 'name',
+      render: text => {
+        return <Text ellipsis={{ showTooltip: true }}>{text}</Text>;
+      },
+    },
+    {
+      title: 'No Telp',
+      dataIndex: 'phoneNumber',
+      render: text => {
+        return <Text ellipsis={{ showTooltip: true }}>{text}</Text>;
+      },
+    },
+    {
+      title: 'Alamat',
+      dataIndex: 'address',
       render: text => {
         return <Text ellipsis={{ showTooltip: true }}>{text}</Text>;
       },
@@ -50,36 +64,28 @@ export default function DeleteTrademarkModal(props: TProps) {
 
   return (
     <Modal
-      className={styles.deleteTrademarkModal}
+      className={styles.deleteUserModal}
       visible={isVisible}
       footer={undefined}
       closeIcon={undefined}
       onCancel={onCancel}
-      header={<Title heading={4}>Hapus Trademark</Title>}
+      header={<Title heading={4}>Hapus User</Title>}
       size="medium"
     >
       <Table
-        className={styles.deleteTrademarkTable}
+        className={styles.deleteUserTable}
         columns={columns}
         pagination={{ pageSize: 10, formatPageText: false }}
         dataSource={valueList}
         empty={
-          <Empty
-            image={<IllustrationNoContent className={styles.noDataDisplay} />}
-            description={'Tidak ada trademark'}
-          />
+          <Empty image={<IllustrationNoContent className={styles.noDataDisplay} />} description={'Tidak ada user'} />
         }
       />
       <div className={styles.btnContainer}>
         <Button className={styles.cancelBtn} onClick={onCancel}>
           Batal
         </Button>
-        <Button
-          theme="solid"
-          className={styles.submitBtn}
-          onClick={handleDeleteTrademark}
-          disabled={shouldDisableDeleteBtn}
-        >
+        <Button theme="solid" className={styles.submitBtn} onClick={handleDeleteUser} disabled={shouldDisableDeleteBtn}>
           {isSubmitting ? <Spin /> : 'Hapus'}
         </Button>
       </div>

@@ -13,28 +13,22 @@ import { ELocalStorageKey } from 'src/constants/local-storage';
 type TProps = {
   initialSort: TSort;
   sortOptions: TSortOption[];
-  onChangeSort?: (value: TSort) => void;
   initialFilters: Record<string, unknown>;
   filterFields: TFilterField[];
-  onSubmitFilter?: (filters: Record<string, unknown>) => void;
   addNewDataLabel: string;
   onClickAddNewData?: () => void;
   initialPagination: TPagination;
-  onChangePagination?: (pagination: TPagination) => void;
 };
 
 export default function useToolbar(props: TProps) {
   const {
     initialSort,
     sortOptions,
-    onChangeSort,
     initialFilters,
     filterFields,
-    onSubmitFilter,
     addNewDataLabel,
     onClickAddNewData,
     initialPagination,
-    onChangePagination,
   } = props;
 
   const [sort, setSort] = useState<TSort>(initialSort);
@@ -43,9 +37,16 @@ export default function useToolbar(props: TProps) {
   const [showFiltersForm, setShowFiltersForm] = useState(false);
   const [formApi, setFormApi] = useState<FormApi>();
 
+  function handleChangePageToInitialPage() {
+    setPagination(pagination => ({
+      ...pagination,
+      page: initialPagination?.page,
+    }));
+  }
+
   function handleChangeSort(sort: TSort) {
     setSort(sort);
-    onChangeSort?.(sort);
+    handleChangePageToInitialPage();
   }
 
   function handleToggleShowFiltersForm() {
@@ -54,20 +55,21 @@ export default function useToolbar(props: TProps) {
 
   function handleSubmitFilters(values: Record<string, unknown>) {
     setFilters(values);
-    onSubmitFilter?.(values);
+    handleChangePageToInitialPage();
   }
 
   function handleClearFilters() {
     formApi?.setValues(initialFilters);
     setFilters(initialFilters);
+    handleChangePageToInitialPage();
   }
 
-  function handleChangePagination(currentPage: number) {
+  function handleChangePagination(currentPage: number, pageSize: number) {
     setPagination(pagination => ({
       ...pagination,
       page: currentPage,
+      pageSize,
     }));
-    onChangePagination?.(pagination);
   }
 
   function handleChangePageSize(pageSize: number) {
@@ -110,7 +112,7 @@ export default function useToolbar(props: TProps) {
 
   const paginationDisplay = (
     <Pagination
-      total={80}
+      total={pagination.total}
       currentPage={pagination.page}
       pageSize={pagination.pageSize}
       className={styles.pagination}
@@ -121,5 +123,5 @@ export default function useToolbar(props: TProps) {
     ></Pagination>
   );
 
-  return { sort, filters, pagination, showFiltersForm, toolbar, filtersForm, paginationDisplay };
+  return { sort, pagination, setPagination, paginationDisplay, filters, showFiltersForm, filtersForm, toolbar };
 }

@@ -3,6 +3,8 @@ import LoginPage from './pages/login';
 import DashboardPage from './pages/dashboard';
 import MasterBarangPage from './pages/master/barang';
 import MasterTrademarkPage from './pages/master/trademark';
+import UserPage from './pages/user';
+import ShopPage from './pages/shop';
 import { LocaleProvider } from '@douyinfe/semi-ui';
 import id_ID from '@douyinfe/semi-ui/lib/es/locale/source/id_ID';
 
@@ -56,6 +58,14 @@ function App() {
               element: <div>hutang</div>,
             },
           ],
+        },
+        {
+          path: 'user',
+          element: <UserPage />,
+        },
+        {
+          path: 'shop',
+          element: <ShopPage />,
         },
       ],
     },
