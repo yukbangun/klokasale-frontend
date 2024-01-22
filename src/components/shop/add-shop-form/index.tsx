@@ -1,6 +1,9 @@
-import { Button, Form, Modal, Spin, Typography } from '@douyinfe/semi-ui';
+import { Button, Form, Modal, Spin, Toast, Typography } from '@douyinfe/semi-ui';
 import { useState } from 'react';
 import styles from './index.module.scss';
+import { ShopCreateShopReq, ShopsApi } from 'src/services';
+import { axiosInstance } from 'src/constants/axios';
+import { TError } from 'src/types/error';
 
 const { Title } = Typography;
 
@@ -11,15 +14,23 @@ type TProps = {
 };
 
 export default function AddShopForm(props: TProps) {
-  const { isVisible, onCancel } = props;
+  const { isVisible, onCancel, onSubmitSuccess } = props;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleAddShop(values: Record<string, unknown>) {
+  async function handleAddShop(values: Omit<ShopCreateShopReq, 'shopGroupId'>) {
     try {
-      // TODO: handle submit shop
       setIsSubmitting(true);
+      const shopApi = new ShopsApi(undefined, undefined, axiosInstance);
+      await shopApi.createShop({ ...values, shopGroupId: 1 });
+      Toast.success('Shop berhasil ditambah');
+      onCancel();
+      onSubmitSuccess?.();
     } catch (e) {
-      // TODO: show error toast
+      const { response } = e as TError;
+      const { data } = response || {};
+      const { error } = data || {};
+      const { message } = error || {};
+      Toast.error(message);
     } finally {
       setIsSubmitting(false);
     }

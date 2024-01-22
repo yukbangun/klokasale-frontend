@@ -1,7 +1,7 @@
 import { ESortDirection } from 'src/constants/sort';
 
 export type TSort =
-  | string
+  | undefined
   | {
       field: string;
       direction?: ESortDirection;

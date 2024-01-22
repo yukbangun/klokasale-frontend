@@ -1,7 +1,7 @@
 export enum ESortDirection {
-  Asc = 'asc',
-  Desc = 'desc',
+  Asc = 'ASC',
+  Desc = 'DESC',
 }
 
-export const DEFAULT_SORT = 'default';
+export const DEFAULT_SORT = undefined;
 export const DEFAULT_SORT_LABEL = 'Default Sort';
