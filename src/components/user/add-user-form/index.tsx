@@ -1,7 +1,8 @@
 import { Button, Form, Modal, Spin, Typography } from '@douyinfe/semi-ui';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './index.module.scss';
 import { isNullish } from 'src/utils/nullish';
+import { FormApi } from '@douyinfe/semi-ui/lib/es/form';
 
 const { Title } = Typography;
 
@@ -14,25 +15,57 @@ type TProps = {
 export default function AddUserForm(props: TProps) {
   const { isVisible, onCancel } = props;
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formApiRef = useRef<FormApi>();
 
-  function handleAddUser(values: Record<string, unknown>) {
-    try {
-      // TODO: handle submit user
-      setIsSubmitting(true);
-      const hasPhoneSuffix = !isNullish(values?.phoneSuffix);
-      if (hasPhoneSuffix) {
-        values.phoneNumber = `${values?.phonePrefix}${values?.phoneSuffix}`;
-      }
-    } catch (e) {
-      // TODO: show error toast
-    } finally {
-      setIsSubmitting(false);
-    }
+  // function handleAddUser(values: Record<string, unknown>) {
+  //   try {
+  //     // TODO: handle submit user
+  //     setIsSubmitting(true);
+  //     const hasPhoneSuffix = !isNullish(values?.phoneSuffix);
+  //     if (hasPhoneSuffix) {
+  //       values.phoneNumber = `${values?.phonePrefix}${values?.phoneSuffix}`;
+  //     }
+  //   } catch (e) {
+  //     // TODO: show error toast
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // }
+
+  function handleAddUser() {
+    console.log('hahaha ', formApiRef?.current?.getValues());
+    formApiRef.current
+      ?.validate()
+      .then(async formValues => {
+        try {
+          // TODO: handle submit user
+          setIsSubmitting(true);
+          const hasPhoneSuffix = !isNullish(formValues?.phoneSuffix);
+          if (hasPhoneSuffix) {
+            formValues.phoneNumber = `${formValues?.phonePrefix}${formValues?.phoneSuffix}`;
+          }
+        } catch (e) {
+          // TODO: show error toast
+        } finally {
+          setIsSubmitting(false);
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
-  function handleValidateConfirmPassword(val: any, values: Record<string, any>) {
+  function handleValidateConfirmPassword(val: string, values: Record<string, any>) {
     if (val !== values?.password) {
       return 'konfirmasi password berbeda dengan password';
+    }
+    return '';
+  }
+
+  function handleValidatePassword(val: string, values: Record<string, any>) {
+    const isConfirmPasswordTouched = formApiRef.current?.getTouched('confirmPassword');
+    if (isConfirmPasswordTouched && val !== values?.confirmPassword) {
+      formApiRef.current?.setError('confirmPassword', 'konfirmasi password berbeda dengan password');
     }
     return '';
   }
@@ -41,12 +74,26 @@ export default function AddUserForm(props: TProps) {
     <Modal
       className={styles.addUserModal}
       visible={isVisible}
-      footer={undefined}
+      footer={
+        <div className={styles.formBtnContainer}>
+          <Button className={styles.cancelBtn} onClick={onCancel}>
+            Batal
+          </Button>
+          <Button theme="solid" className={styles.submitBtn} onClick={handleAddUser}>
+            {isSubmitting ? <Spin /> : 'Konfirmasi'}
+          </Button>
+        </div>
+      }
       closeIcon={undefined}
       onCancel={onCancel}
       header={<Title heading={4}>Tambah User</Title>}
+      size="medium"
     >
-      <Form className={styles.userForm} onSubmit={handleAddUser}>
+      <Form
+        className={styles.userForm}
+        onSubmit={handleAddUser}
+        getFormApi={(formApi: FormApi) => (formApiRef.current = formApi)}
+      >
         <Form.Input
           rules={[{ required: true, message: 'username harus diisi' }]}
           field="username"
@@ -65,6 +112,7 @@ export default function AddUserForm(props: TProps) {
           label="Password"
           placeholder="Masukkan password"
           type="password"
+          validate={handleValidatePassword}
         />
         <Form.Input
           rules={[{ required: true, message: 'mohon konfirmasi password' }]}
@@ -81,14 +129,14 @@ export default function AddUserForm(props: TProps) {
           <Form.Input field="phoneNumberSuffix" placeholder="Masukkan no telefon" />
         </Form.InputGroup>
         <Form.Input field="address" label="Alamat" placeholder="Masukkan alamat" />
-        <div className={styles.formBtnContainer}>
+        {/* <div className={styles.formBtnContainer}>
           <Button className={styles.cancelBtn} onClick={onCancel}>
             Batal
           </Button>
           <Button theme="solid" className={styles.submitBtn} htmlType="submit">
             {isSubmitting ? <Spin /> : 'Konfirmasi'}
           </Button>
-        </div>
+        </div> */}
       </Form>
     </Modal>
   );

@@ -1,31 +1,40 @@
-import { Button, Form, Spin, Typography } from '@douyinfe/semi-ui';
+import { Button, Form, Spin, Toast, Typography } from '@douyinfe/semi-ui';
 import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import styles from './index.module.scss';
+import { UsersApi } from 'src/services';
+import { TError } from 'src/types/error';
 import { isNullish } from 'src/utils/nullish';
-import { ELocalStorageKey } from 'src/constants/local-storage';
+import styles from './index.module.scss';
+import { axiosInstance } from 'src/constants/axios';
+
 const { Title } = Typography;
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  function handleLogin(values: unknown) {
+  const [cookies] = useCookies();
+
+  async function handleLogin(values: { username: string; password: string }) {
     try {
-      // TODO: handle login
-      // TODO: set bearer token to local storage
       setIsSubmitting(true);
-      localStorage.setItem(ELocalStorageKey.BearerToken, 'a');
+      const { username, password } = values;
+      const userApi = new UsersApi(undefined, undefined, axiosInstance);
+      await userApi.userLogin({ username, password });
       navigate('/');
     } catch (e) {
-      // TODO: show error toast
+      const { response } = e as TError;
+      const { data } = response || {};
+      const { error } = data || {};
+      const { message } = error || {};
+      Toast.error(message);
     } finally {
       setIsSubmitting(false);
     }
   }
 
   useEffect(() => {
-    const bearerToken = localStorage.getItem(ELocalStorageKey.BearerToken);
-    if (!isNullish(bearerToken)) {
+    if (!isNullish(cookies?.token)) {
       navigate('/');
     }
   }, []);
