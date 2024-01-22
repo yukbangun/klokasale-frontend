@@ -20,7 +20,7 @@ export default function LoginPage() {
       setIsSubmitting(true);
       const { username, password } = values;
       const userApi = new UsersApi(undefined, undefined, axiosInstance);
-      await userApi.v1UsersLoginPost({ username, password });
+      await userApi.userLogin({ username, password });
       navigate('/');
     } catch (e) {
       const { response } = e as TError;

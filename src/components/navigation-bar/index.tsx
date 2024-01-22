@@ -3,29 +3,31 @@ import { OnSelectedData } from '@douyinfe/semi-ui/lib/es/navigation';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Navigation, navigationToLabelMap } from 'src/constants/navigation';
-import { MasterNavigation, masterNavigationToLabelMap } from 'src/constants/navigation/master';
+import { ENavigation, navigationToLabelMap } from 'src/constants/navigation';
+import { EMasterNavigation, masterNavigationToLabelMap } from 'src/constants/navigation/master';
 import { TNavigation } from 'src/types/navigation';
 import styles from './index.module.scss';
 
 const { Text } = Typography;
 
 export default function NavigationBar() {
-  const [selectedNav, setSelectedNav] = useState<TNavigation>(Navigation.Pos);
+  const [selectedNav, setSelectedNav] = useState<TNavigation>(ENavigation.Pos);
   const navigate = useNavigate();
   const location = useLocation();
   const [, , removeCookie] = useCookies();
 
   const navigationItems = [
-    { itemKey: Navigation.Pos, text: navigationToLabelMap[Navigation.Pos] },
+    { itemKey: ENavigation.Pos, text: navigationToLabelMap[ENavigation.Pos] },
     {
-      text: navigationToLabelMap[Navigation.Master],
-      itemKey: Navigation.Master,
-      items: Object.values(MasterNavigation)?.map(masterNav => ({
-        itemKey: `${Navigation.Master}/${masterNav}`,
+      text: navigationToLabelMap[ENavigation.Master],
+      itemKey: ENavigation.Master,
+      items: Object.values(EMasterNavigation)?.map(masterNav => ({
+        itemKey: `${ENavigation.Master}/${masterNav}`,
         text: masterNavigationToLabelMap[masterNav],
       })),
     },
+    { itemKey: ENavigation.User, text: navigationToLabelMap[ENavigation.User] },
+    { itemKey: ENavigation.Shop, text: navigationToLabelMap[ENavigation.Shop] },
   ];
 
   const storeGroupTreeData = [
@@ -80,7 +82,7 @@ export default function NavigationBar() {
 
   useEffect(() => {
     const { pathname = '' } = location;
-    const selectedNav = (pathname.slice(1) as TNavigation) || Navigation.Pos;
+    const selectedNav = (pathname.slice(1) as TNavigation) || ENavigation.Pos;
     setSelectedNav(selectedNav);
   }, [location]);
 

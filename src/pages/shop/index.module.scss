@@ -1,0 +1,41 @@
+.shopPage {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+
+  .shopContainer {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+
+    .shopTable {
+      overflow: auto;
+      flex: 1;
+
+      .editAndDeleteContainer {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        width: fit-content;
+      }
+
+      .noDataDisplay {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    .errorDisplayContainer {
+      flex: 1;
+      padding-top: 40px;
+    }
+  }
+}
+
+.noPermissionDisplayContainer {
+  padding-top: 40px;
+}

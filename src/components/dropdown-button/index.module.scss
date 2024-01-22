@@ -1,0 +1,26 @@
+.dropdownBtn {
+  width: 280px;
+
+  .btnIcon {
+    color: var(--semi-color-text-0);
+  }
+
+  :global {
+    .semi-button-content {
+      min-width: 0;
+      justify-content: space-between !important;
+      flex: 1;
+
+      .semi-button-content-left {
+        min-width: 0;
+      }
+    }
+  }
+}
+
+.dropdownItem {
+  // whiteSpace noWrap to fix limited dropdown width when dropdown is displayed near right border of screen
+  white-space: nowrap;
+
+}
+

@@ -1,1 +1,1 @@
-export enum Authority {}
+export enum EAuthority {}

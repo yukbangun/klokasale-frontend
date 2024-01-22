@@ -1,0 +1,26 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .sortAndFilter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+.filtersFormContainer {
+  border-top: 2px solid var(--semi-color-border);
+
+  .formFooterRight {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+  }
+}
+
+.pagination {
+  margin: 0 auto;
+}

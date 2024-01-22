@@ -1,0 +1,28 @@
+.editShopModal {
+
+  .shopForm {
+
+    .phoneNumberInputGroup {
+      flex-wrap: nowrap;
+      width: 100%;
+
+      :global {
+        .semi-input-wrapper {
+          flex: 1;
+        }
+      }
+    }
+
+    .formBtnContainer {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+  }
+
+  :global {
+    .semi-modal-content {
+      padding: 24px;
+    }
+  }
+}

@@ -8,6 +8,9 @@ dependencies:
   '@douyinfe/semi-icons':
     specifier: ^2.49.1
     version: 2.49.1(react@18.2.0)
+  '@douyinfe/semi-illustrations':
+    specifier: ^2.49.2
+    version: 2.51.3(react@18.2.0)
   '@douyinfe/semi-ui':
     specifier: ^2.49.1
     version: 2.49.1(react-dom@18.2.0)(react@18.2.0)
@@ -33,8 +36,11 @@ dependencies:
     specifier: ^18.2.18
     version: 18.2.18
   axios:
-    specifier: ^1.6.3
+    specifier: ^1.6.4
     version: 1.6.4
+  classnames:
+    specifier: ^2.4.0
+    version: 2.4.0
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -1786,6 +1792,14 @@ packages:
 
   /@douyinfe/semi-illustrations@2.49.1(react@18.2.0):
     resolution: {integrity: sha512-zJ71DrsGNvTpQwv2itQe7SkMyBMmWvlTGYoAUD4mDVaxAVPlUGgl3Fc5zVG9BHXIizHrb3Fi5PVFC5g/dFXn0A==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /@douyinfe/semi-illustrations@2.51.3(react@18.2.0):
+    resolution: {integrity: sha512-UK7i8+MT/pDwRMgOOint+JjnjdL2XsAGiMVKXsaxB4dz2OO+xa4QYcXg5Y62ggJwebKeKXJP0J22Dm3SG+hpxw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
@@ -5504,6 +5518,16 @@ packages:
 
   /flatted@3.2.9:
     resolution: {integrity: sha512-36yxDn5H7OFZQla0/jFJmbIKTdZAQHngCedGxiMmpNfEZM0sdEeT+WczLQrjK6D7o2aiyLYDnkw0R3JK0Qv1RQ==}
+    dev: false
+
+  /follow-redirects@1.15.4:
+    resolution: {integrity: sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
     dev: false
 
   /follow-redirects@1.15.4:
