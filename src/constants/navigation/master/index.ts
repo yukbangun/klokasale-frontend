@@ -1,7 +1,7 @@
 export enum EMasterNavigation {
   Trademark = 'trademark',
   Barang = 'barang',
-  Unit = 'unit',
+  Uom = 'uom',
   Supplier = 'supplier',
   Pelanggan = 'pelanggan',
   KasDanBiaya = 'kas_dan_biaya',
@@ -12,7 +12,7 @@ export enum EMasterNavigation {
 export enum EMasterNavigationLabel {
   Trademark = 'Trademark',
   Barang = 'Barang',
-  Unit = 'Unit (UOM)',
+  Uom = 'Unit (UOM)',
   Supplier = 'Supplier',
   Pelanggan = 'Pelanggan',
   KasDanBiaya = 'Kas & Biaya',
@@ -23,7 +23,7 @@ export enum EMasterNavigationLabel {
 export const masterNavigationToLabelMap = {
   [EMasterNavigation.Trademark]: EMasterNavigationLabel.Trademark,
   [EMasterNavigation.Barang]: EMasterNavigationLabel.Barang,
-  [EMasterNavigation.Unit]: EMasterNavigationLabel.Unit,
+  [EMasterNavigation.Uom]: EMasterNavigationLabel.Uom,
   [EMasterNavigation.Supplier]: EMasterNavigationLabel.Supplier,
   [EMasterNavigation.Pelanggan]: EMasterNavigationLabel.Pelanggan,
   [EMasterNavigation.KasDanBiaya]: EMasterNavigationLabel.KasDanBiaya,

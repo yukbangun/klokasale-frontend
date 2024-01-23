@@ -7,6 +7,7 @@ import UserPage from './pages/user';
 import ShopPage from './pages/shop';
 import { LocaleProvider } from '@douyinfe/semi-ui';
 import id_ID from '@douyinfe/semi-ui/lib/es/locale/source/id_ID';
+import MasterUomPage from './pages/master/uom';
 
 function App() {
   const router = createBrowserRouter([
@@ -34,8 +35,8 @@ function App() {
               element: <MasterBarangPage />,
             },
             {
-              path: 'unit',
-              element: <div>unit</div>,
+              path: 'uom',
+              element: <MasterUomPage />,
             },
             {
               path: 'supplier',

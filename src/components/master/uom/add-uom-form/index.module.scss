@@ -1,0 +1,17 @@
+.addUomModal {
+
+  .uomForm {
+
+    .formBtnContainer {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+  }
+
+  :global {
+    .semi-modal-content {
+      padding: 24px;
+    }
+  }
+}

@@ -1,8 +1,8 @@
 import { Button, Form, Modal, Spin, Typography } from '@douyinfe/semi-ui';
-import { useRef, useState } from 'react';
-import styles from './index.module.scss';
-import { isNullish } from 'src/utils/nullish';
 import { FormApi } from '@douyinfe/semi-ui/lib/es/form';
+import { useRef, useState } from 'react';
+import { isNullish } from 'src/utils/nullish';
+import styles from './index.module.scss';
 
 const { Title } = Typography;
 
