@@ -12,7 +12,7 @@ export enum EMasterNavigation {
 export enum EMasterNavigationLabel {
   Trademark = 'Trademark',
   Barang = 'Barang',
-  Uom = 'Unit (UOM)',
+  Uom = 'Satuan',
   Supplier = 'Supplier',
   Pelanggan = 'Pelanggan',
   KasDanBiaya = 'Kas & Biaya',

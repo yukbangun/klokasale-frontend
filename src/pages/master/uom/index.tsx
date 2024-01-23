@@ -187,7 +187,10 @@ export default function MasterUomPage() {
             },
           ]}
           empty={
-            <Empty image={<IllustrationNoContent className={styles.noDataDisplay} />} description={'Belum ada uom'} />
+            <Empty
+              image={<IllustrationNoContent className={styles.noDataDisplay} />}
+              description={'Belum ada satuan'}
+            />
           }
         />
         {paginationDisplay}
