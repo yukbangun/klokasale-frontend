@@ -1,6 +1,6 @@
 import { Toast } from '@douyinfe/semi-ui';
 import { useState } from 'react';
-import DeleteUserModal from 'src/components/user/delete-user';
+import DeleteUserModal from 'src/components/user/delete-user-modal';
 import { isNullish } from 'src/utils/nullish';
 
 type TProps = {

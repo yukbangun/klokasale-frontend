@@ -1,6 +1,6 @@
 import { Toast } from '@douyinfe/semi-ui';
 import { useState } from 'react';
-import DeleteShopModal from 'src/components/shop/delete-shop-form';
+import DeleteShopModal from 'src/components/shop/delete-shop-modal';
 import { isNullish } from 'src/utils/nullish';
 
 type TProps = {
