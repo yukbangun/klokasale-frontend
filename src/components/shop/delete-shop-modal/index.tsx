@@ -4,7 +4,7 @@ import Table, { ColumnProps } from '@douyinfe/semi-ui/lib/es/table';
 import { useState } from 'react';
 import { isNullish } from 'src/utils/nullish';
 import styles from './index.module.scss';
-import { ShopDeleteShopReq, ShopShopResp, ShopsApi } from 'src/services';
+import { ShopShopResp, ShopsApi } from 'src/services';
 import { axiosInstance } from 'src/constants/axios';
 import { TError } from 'src/types/error';
 
